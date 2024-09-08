@@ -11,9 +11,9 @@ public class BankingSystem
 		
 		//Creating a window--(something like a layout)
 		JFrame frame = new JFrame(); //An object frame is instantiated based on JFrame class
-		frame.setTitle("QUANTUM FINANCIAL"); //This sets a title of the frame
+		frame.setTitle("QUANTUM FINANCIAL APP"); //This sets a title of the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //EXIT OUT OF APPLICATION
-		frame.setSize(500,500); //Setting the frame size (It sets the X-dimenssion and Y-dimenssion of a frame)
+		frame.setSize(1000,500); //Setting the frame size (It sets the X-dimenssion and Y-dimenssion of a frame)
 		frame.setResizable(true); //Prevent frame from being resized
 		frame.setVisible(true); //Making the frame visible ( true to allow it to be visible and false to not allow it to be visible
 		
@@ -30,7 +30,7 @@ public class BankingSystem
 		//Declare variable
         int iOperation1, iOperation2; 
 		int iPIN1 = 1234, iPIN_Entered1, iOption;
-		double rBalance = 1000, rDeposit , rWithdraw = 0;
+		double rBalance = 1000, rDeposit , rTransfer = 0;
 		char cOtherOptions;
 		int iPinAttempts = 3;
 		
@@ -43,7 +43,7 @@ public class BankingSystem
 		
 		//Input
 		System.out.println("+-----------------------------------+");
-		System.out.println("|   ...QUANTUM FINANCIAL...         |");
+		System.out.println("|       QUANTUM FINANCIAL APP       |");
 		System.out.println("|-----------------------------------|");
 		System.out.println("|\tSELECT AN OPERATION BELOW   |");
 		System.out.println("|-----------------------------------|");
@@ -63,11 +63,13 @@ public class BankingSystem
 			if ( iPIN1 == iPIN_Entered1 )
 			{
 				System.out.println("+------------------------------------------+");
+				System.out.println("|\tACCOUNT MANAGEMENT                 |");
+				System.out.println("|------------------------------------------|");
 				System.out.println("|\tSELECT ONE OF THE OPTIONS BELOW    |");
 				System.out.println("|------------------------------------------|");
 				System.out.println("|\t1 <---- Balance                    |");
 				System.out.println("|\t2 <---- Deposit                    |");
-				System.out.println("|\t3 <---- Withdraw                   |");
+				System.out.println("|\t3 <---- Transfer                   |");
 				System.out.println("|\t4 <---- Statement                  |");
  				System.out.println("|\t5 <---- Exit                       |");
 				System.out.println("+------------------------------------------+");
@@ -92,12 +94,12 @@ public class BankingSystem
 				        System.out.println("Available Balance: "+formatter.format(rBalance));
 						break;
 				
-				        case 3 : //Withdrawl
-				        System.out.println("Enter the withdrawal amount: ");
-						rWithdraw = input.nextDouble();
-				        rBalance = rBalance - rWithdraw;
+				        case 3 : //Tranfer money
+				        System.out.println("Enter transfer amount: ");
+						rTransfer = input.nextDouble();
+				        rBalance = rBalance - rTransfer;
 
-				        System.out.println("Amount withdrawn : "+formatter.format(rWithdraw));
+				        System.out.println("Amount Transfered : "+formatter.format(rTransfer));
 						System.out.println("Available balance: "+formatter.format(rBalance));
 						break;
 					
@@ -114,11 +116,13 @@ public class BankingSystem
 				   }
 				   
 				    System.out.println("+------------------------------------------+");
+				    System.out.println("|\tACCOUNT MANAGEMENT                 |");
+				    System.out.println("|------------------------------------------|");
 				    System.out.println("|\tSELECT ONE OF THE OPTIONS BELOW    |");
 				    System.out.println("|------------------------------------------|");
 				    System.out.println("|\t1 <---- Balance                    |");
 				    System.out.println("|\t2 <---- Deposit                    |");
-				    System.out.println("|\t3 <---- Withdraw                   |");
+				    System.out.println("|\t3 <---- Transfer                   |");
 				    System.out.println("|\t4 <---- Statement                  |");
  				    System.out.println("|\t5 <---- Exit                       |");
 				    System.out.println("+------------------------------------------+");
