@@ -1,38 +1,13 @@
 import java.util.Scanner; //Scanner class is imported from java.util package
 import java.text.DecimalFormat; //DecimalFormat class is imported from java.text package
-import javax.swing.JFrame; //JFrame class is imported from swing library
-import javax.swing.ImageIcon; //ImageIcon is imported swing library to change the log to my own choise of my logo
-import java.awt.Color; //Color is imported from java.awt package
-
-public class BankingSystem
+public class BankingSystemTestingJava2
 {//Start class	
 	public static void main(String[] args)
 	{//Start main method
 		
-		//Creating a window--(something like a layout)
-		JFrame frame = new JFrame(); //An object frame is instantiated based on JFrame class
-		frame.setTitle("QUANTUM FINANCIAL APP"); //This sets a title of the frame
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //EXIT OUT OF APPLICATION
-		frame.setSize(1000,500); //Setting the frame size (It sets the X-dimenssion and Y-dimenssion of a frame)
-		frame.setResizable(true); //Prevent frame from being resized
-		frame.setVisible(true); //Making the frame visible ( true to allow it to be visible and false to not allow it to be visible
-		
-		ImageIcon image = new ImageIcon("Logo.png"); //Create an image Icon
-		//frame.setIconImage(Image.getImage()); //This will change the icon of frame
-		
-		//Changing the color of the frame
-		frame.getContentPane().setBackground(new Color(800080)); //Change the color of the background(Google hexadecimal Colors)
-		
 		//Instantiation of object
 		Scanner input = new Scanner(System.in);
 		DecimalFormat formatter = new DecimalFormat("R00.00");
-		
-		//Declare variable
-        int iOperation1, iOperation2; 
-		int iPIN1 = 1234, iPIN_Entered1, iOption;
-		double rBalance = 1000, rDeposit , rTransfer = 0;
-		char cOtherOptions;
-		int iPinAttempts = 3;
 		
 		//Flags---(Not used yet)
 		boolean bPerson1 = false;
@@ -41,105 +16,176 @@ public class BankingSystem
 		boolean bPerson4 = false;
 		boolean bPerson5 = false;
 		
-		//Input
-		System.out.println("+-----------------------------------+");
-		System.out.println("|       QUANTUM FINANCIAL APP       |");
-		System.out.println("|-----------------------------------|");
-		System.out.println("|\tSELECT AN OPERATION BELOW   |");
-		System.out.println("|-----------------------------------|");
-		System.out.println("|\t1 <---- login               |");
-		System.out.println("|\t2 <---- Open account        |");
-		System.out.println("+-----------------------------------+");
-		iOperation1 = input.nextInt();
+		//Declare variables for login process
+		String sPINregistered1 = "",sPINregistered2 = "",sPINregistered3 = "",sPINregistered4 = "",sPINregistered5 = "";
+		String sPhoneNumbersRegistered1 = "",sPhoneNumbersRegistered2 = "",sPhoneNumbersRegistered3 = "",sPhoneNumbersRegistered4 = "",sPhoneNumbersRegistered5 = "";
+		int iClientNumber;
 		
-		switch ( iOperation1 )
-		{ //Start switch for operation 1
-		
-			case 1 : //From log in process
-			System.out.println("Enter pin: ");
-			iPIN_Entered1 = input.nextInt();
+		//Declaring variables for client names  registration
+		String sFirstName1,sSecondName1,sLastName1;
+		//Declaring variables for client Phone number registration
+		String sPhoneNumber1 = "";
+		//Declaring variables for IDnumberRegistration
+		String sIDnumber1;
+		//Declaring variables for PIN registration
+		String sPINcreate;
+
+
+		while ( true )
+		{//Start while(true)-infinite loop
 			
-			//Giving the user an access if the user entered the correct pin
-			if ( iPIN1 == iPIN_Entered1 )
-			{
-				System.out.println("+------------------------------------------+");
-				System.out.println("|\tACCOUNT MANAGEMENT                 |");
-				System.out.println("|------------------------------------------|");
-				System.out.println("|\tSELECT ONE OF THE OPTIONS BELOW    |");
-				System.out.println("|------------------------------------------|");
-				System.out.println("|\t1 <---- Balance                    |");
-				System.out.println("|\t2 <---- Deposit                    |");
-				System.out.println("|\t3 <---- Transfer                   |");
-				System.out.println("|\t4 <---- Statement                  |");
- 				System.out.println("|\t5 <---- Exit                       |");
-				System.out.println("+------------------------------------------+");
-				iOperation2 = input.nextInt();
+			//Log-in and opening account
+			System.out.println("+-----------------------------------+");
+			System.out.println("|        UNITY FINANCIAL BANK       |");
+			System.out.println("|-----------------------------------|");
+			System.out.println("|\tSELECT AN OPERATION BELOW   |");
+			System.out.println("|-----------------------------------|");
+			System.out.println("|\t1 <---- login               |");
+			System.out.println("|\t2 <---- Open account        |");
+			System.out.println("+-----------------------------------+");
+			int iOperation = input.nextInt();
+			
+		    switch ( iOperation )
+			{//Start switch
+				
+				//log in
+				case 1 :
+				System.out.println("+--------------------------------------------+");
+				System.out.println("|           UNITY FINANCIAL BANK             |");
+				System.out.println("|--------------------------------------------|");
+				System.out.println("|  Enter your client number(between 1 to 5): |");
+				System.out.println("+--------------------------------------------+");
+				iClientNumber = input.nextInt();
+				
+				//Client 1 log in
+				if ( iClientNumber == 1 )
+				    {//Start operations for client 1
+				    while ( iClientNumber == 1 )
+						{
+							input.nextLine();
+							System.out.println("You will provide your phone numbers and PIN to prove you are client 1");
+							System.out.println("Enter phone numbers: ");
+							String sPhoneNumbers = input.nextLine();
+							System.out.println("Enter PIN: ");
+							String sPIN = input.nextLine();
+							if ( sPhoneNumbers.equals(sPhoneNumber1) && sPIN.equals(sPINregistered1))
+							{
+								System.out.println("Login successful");
+								System.out.println("+------------------------------------------+");
+								System.out.println("|\tACCOUNT MANAGEMENT                 |");
+								System.out.println("|------------------------------------------|");
+								System.out.println("|\tSELECT ONE OF THE OPTIONS BELOW    |");
+								System.out.println("|------------------------------------------|");
+								System.out.println("|\t1 <---- Balance                    |");
+								System.out.println("|\t2 <---- Deposit                    |");
+								System.out.println("|\t3 <---- Transfer                   |");
+								System.out.println("|\t4 <---- Statement                  |");
+								System.out.println("|\t5 <---- Exit                       |");
+								System.out.println("+------------------------------------------+");
+								int iOperation1 = input.nextInt();
+								
+								//Client 1 transactions
+								double rBalance1 = 0;
+								switch ( iOperation1 )
+								{
+									case 1 :
+										System.out.println("Balance: "+formatter.format(rBalance1));
+									break;
+									
+									case 2 :
+										System.out.println("Enter the deposit Amount: ");
+										double rDeposit1 = input.nextDouble();
+										System.out.println("Amount deposited : "+formatter.format(rDeposit1));
+										rBalance1 = rBalance1 + rDeposit1;
+										System.out.println("Available Balance: "+formatter.format(rBalance1));
+									break;
+									
+									case 3 :
+										System.out.println("Enter amount you want to withdraw: ");
+										double rWithdrawAmount1 = input.nextDouble();
+										rBalance1 = rBalance1 - rWithdrawAmount1;
+										System.out.println("Amount withdawan : "+formatter.format(rWithdrawAmount1));
+										System.out.println("Available balance: "+formatter.format(rBalance1));
+									break;
+									
+									case 4 :
+									break;
+									
+									case 5 :
+									break;
+									
+									default :
+										System.out.println("Invalid option");
+										
+								}	
+							}
+							else
+							{
+								System.out.println("|--------------------------------------------|");
+								System.out.println("|\tINVALID LOGIN                        |");
+								System.out.println("|--------------------------------------------|");
+								System.out.println("|  Enter your client number(between 1 to 5): |");
+								System.out.println("+--------------------------------------------+");
+								iClientNumber = input.nextInt();
+							}
+							System.out.println("|\tACCOUNT MANAGEMENT                 |");
+							System.out.println("|------------------------------------------|");
+							System.out.println("|\tSELECT ONE OF THE OPTIONS BELOW    |");
+							System.out.println("|------------------------------------------|");
+							System.out.println("|\t1 <---- Balance                    |");
+							System.out.println("|\t2 <---- Deposit                    |");
+							System.out.println("|\t3 <---- Transfer                   |");
+							System.out.println("|\t4 <---- Statement                  |");
+							System.out.println("|\t5 <---- Exit                       |");
+							System.out.println("+------------------------------------------+");
+							int iOperation1 = input.nextInt();
+						}
+					}//End-operations for client 1
+					
+				break; //breaking switch 1 ( log in )		
 				 
-				//Continuing with option 1 <-- Balance
-				while ( iOperation2 != 5 )
-				{
-					
-				    switch ( iOperation2 )
-			       {
-					
-				        case 1: //View balance
-				        System.out.println("Balance: "+formatter.format(rBalance));
-						break;
+				//Opening Account
+				case 2:
+				System.out.println("+--------------------------------------------+");
+				System.out.println("|           UNITY FINANCIAL BANK             |");
+				System.out.println("|--------------------------------------------|");
+				System.out.println("|  Enter your client number(between 1 to 5): |");
+				System.out.println("+--------------------------------------------+");
+				iClientNumber = input.nextInt();
 				
-				        case 2: //deposit
-				        System.out.println("Enter the deposit Amount: ");
-				        rDeposit = input.nextDouble();
-				        System.out.println("Amount deposited : "+formatter.format(rDeposit));
-				        rBalance = rBalance + rDeposit;
-				        System.out.println("Available Balance: "+formatter.format(rBalance));
-						break;
+				//Registering client 1
+				if ( iClientNumber == 1 )
+					{//Start client 1 registration
+						input.nextLine();
+						System.out.println("Enter your first name: ");
+						sFirstName1 = input.nextLine();
+						System.out.println("Enter your last name: ");
+						sLastName1 = input.nextLine();
+						System.out.println("Enter your phone numbers: ");
+						sPhoneNumber1 = input.nextLine();
+						System.out.println("Enter your ID number: ");
+						sIDnumber1 = input.nextLine();
+						System.out.println("Create PIN: ");
+						sPINcreate = input.nextLine();
+						System.out.println("Confirm your PIN: ");
+						sPINregistered1 = input.nextLine();
+						if ( sPINcreate.equals(sPINregistered1))
+						{
+							System.out.println("Client registration successfully");
+							System.out.println("+-----------------------------------+");
+							System.out.println("|        UNITY FINANCIAL BANK       |");
+							System.out.println("|-----------------------------------|");
+							System.out.println("|\tSELECT AN OPERATION BELOW   |");
+							System.out.println("|-----------------------------------|");
+							System.out.println("|\t1 <---- login               |");
+							System.out.println("|\t2 <---- Open account        |");
+							System.out.println("+-----------------------------------+");
+							iOperation = input.nextInt();
+						}
+					}//End client 1 registration
+				break;
+			}//End switch
 				
-				        case 3 : //Tranfer money
-				        System.out.println("Enter transfer amount: ");
-						rTransfer = input.nextDouble();
-				        rBalance = rBalance - rTransfer;
-
-				        System.out.println("Amount Transfered : "+formatter.format(rTransfer));
-						System.out.println("Available balance: "+formatter.format(rBalance));
-						break;
-					
-					    case 4 : //Printing statement
-					    break; 
-
-			            case 5 : //Long out 
-			            System.out.println("You have logged out successfully");
-						break;
-						
-						default :
-						System.out.println("....Invalid Option....");
-						break;
-				   }
-				   
-				    System.out.println("+------------------------------------------+");
-				    System.out.println("|\tACCOUNT MANAGEMENT                 |");
-				    System.out.println("|------------------------------------------|");
-				    System.out.println("|\tSELECT ONE OF THE OPTIONS BELOW    |");
-				    System.out.println("|------------------------------------------|");
-				    System.out.println("|\t1 <---- Balance                    |");
-				    System.out.println("|\t2 <---- Deposit                    |");
-				    System.out.println("|\t3 <---- Transfer                   |");
-				    System.out.println("|\t4 <---- Statement                  |");
- 				    System.out.println("|\t5 <---- Exit                       |");
-				    System.out.println("+------------------------------------------+");
-				    iOperation2 = input.nextInt();
-				   
-				}
-				
-			}
-			
-			//Opening an account
-			case 2:
-			break;
-			
-			default:
-			System.out.println(".....INVALID OPERATION.....");
-			System.out.println(".....KINDLY SELECT THE CORRECT OPERATION.............");
-		}
-		
+		}//End while(true)-infinite loop
 	}//End main method
-}//End class
+}//End class	
