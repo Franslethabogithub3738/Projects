@@ -1,5 +1,7 @@
 import java.util.Scanner; //Scanner class is imported from java.util package
-import java.text.DecimalFormat; //DecimalFormat class is imported from java.text package
+import java.text.DecimalFormat; //DecimalFormat class is imported from java.text packajave
+
+
 public class BankingSystemTestingJava2
 {//Start class	
 	public static void main(String[] args)
@@ -23,12 +25,21 @@ public class BankingSystemTestingJava2
 		
 		//Declaring variables for client names  registration
 		String sFirstName1,sSecondName1,sLastName1;
+		String sFirstName2,sSecondName12,sLastName2;
 		//Declaring variables for client Phone number registration
 		String sPhoneNumber1 = "";
+		String sPhoneNumber2 = "";
 		//Declaring variables for IDnumberRegistration
-		String sIDnumber1;
+		String sIDnumber1,sIDnumber2;
 		//Declaring variables for PIN registration
 		String sPINcreate;
+		
+		//ClientNumbers
+		int iClientCount1 = 0;
+		int iClientCount2 = 0;
+		int iClientCount3 = 0;
+		int iClientCount4 = 0;
+		int iClientCount5 = 0;
 
 
 		while ( true )
@@ -142,7 +153,8 @@ public class BankingSystemTestingJava2
 						}
 					}//End-operations for client 1
 					
-				break; //breaking switch 1 ( log in )		
+				break; //breaking switch 1 ( log in )
+				
 				 
 				//Opening Account
 				case 2:
@@ -152,6 +164,7 @@ public class BankingSystemTestingJava2
 				System.out.println("|  Enter your client number(between 1 to 5): |");
 				System.out.println("+--------------------------------------------+");
 				iClientNumber = input.nextInt();
+				
 				
 				//Registering client 1
 				if ( iClientNumber == 1 )
@@ -169,6 +182,7 @@ public class BankingSystemTestingJava2
 						sPINcreate = input.nextLine();
 						System.out.println("Confirm your PIN: ");
 						sPINregistered1 = input.nextLine();
+						iClientCount1 ++;
 						if ( sPINcreate.equals(sPINregistered1))
 						{
 							System.out.println("Client registration successfully");
@@ -181,9 +195,66 @@ public class BankingSystemTestingJava2
 							System.out.println("|\t2 <---- Open account        |");
 							System.out.println("+-----------------------------------+");
 							iOperation = input.nextInt();
+							iClientCount1 ++;
+						}
+						while ( iClientCount1 > 0 )
+						{
+							System.out.println ("This client number is already occupied\nPlease try registering on client number 2,3,4 or 5");
+							System.out.println("+--------------------------------------------+");
+							System.out.println("|           UNITY FINANCIAL BANK             |");
+							System.out.println("|--------------------------------------------|");
+							System.out.println("|  Enter your client number(between 1 to 5): |");
+							System.out.println("+--------------------------------------------+");
+							iClientNumber = input.nextInt();
 						}
 					}//End client 1 registration
+				    
+				else if ( iClientNumber == 2 )
+					{//Start client 1 registration
+						input.nextLine();
+						System.out.println("Enter your first name: ");
+						sFirstName2 = input.nextLine();
+						System.out.println("Enter your last name: ");
+						sLastName2 = input.nextLine();
+						System.out.println("Enter your phone numbers: ");
+						sPhoneNumber2 = input.nextLine();
+						System.out.println("Enter your ID number: ");
+						sIDnumber2 = input.nextLine();
+						System.out.println("Create PIN: ");
+						sPINcreate = input.nextLine();
+						System.out.println("Confirm your PIN: ");
+						sPINregistered2 = input.nextLine();
+						iClientCount2 ++;
+						if ( sPINcreate.equals(sPINregistered1))
+						{
+							System.out.println("Client registration successfully");
+							System.out.println("+-----------------------------------+");
+							System.out.println("|        UNITY FINANCIAL BANK       |");
+							System.out.println("|-----------------------------------|");
+							System.out.println("|\tSELECT AN OPERATION BELOW   |");
+							System.out.println("|-----------------------------------|");
+							System.out.println("|\t1 <---- login               |");
+							System.out.println("|\t2 <---- Open account        |");
+							System.out.println("+-----------------------------------+");
+							iOperation = input.nextInt();
+							iClientCount2 ++;
+						}
+						while ( iClientCount1 > 0 )
+						{
+							System.out.println ("This client number is already occupied\nPlease try registering on client number 1,3,4 or 5");
+							System.out.println("+--------------------------------------------+");
+							System.out.println("|           UNITY FINANCIAL BANK             |");
+							System.out.println("|--------------------------------------------|");
+							System.out.println("|  Enter your client number(between 1 to 5): |");
+							System.out.println("+--------------------------------------------+");
+							iClientNumber = input.nextInt();
+						}
+					}//End client 2 registration
+			
+				
 				break;
+				
+				
 			}//End switch
 				
 		}//End while(true)-infinite loop
