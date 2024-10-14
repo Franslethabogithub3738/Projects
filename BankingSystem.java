@@ -10,13 +10,6 @@ public class BankingSystemTesting
         Scanner input = new Scanner(System.in);
         DecimalFormat formatter = new DecimalFormat("R00.00");
 
-        // Flags---(Not used yet)
-        boolean bPerson1 = false;
-        boolean bPerson2 = false;
-        boolean bPerson3 = false;
-        boolean bPerson4 = false;
-        boolean bPerson5 = false;
-
         // Declare variables for login process
         String sPINregistered1 = "", sPINregistered2 = "", sPINregistered3 = "", sPINregistered4 = "", sPINregistered5 = "";
         String sPhoneNumbersRegistered1 = "", sPhoneNumbersRegistered2 = "", sPhoneNumbersRegistered3 = "", sPhoneNumbersRegistered4 = "", sPhoneNumbersRegistered5 = "";
