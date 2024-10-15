@@ -1,7 +1,7 @@
 import java.util.Scanner; // Scanner class is imported from java.util package
 import java.text.DecimalFormat; // DecimalFormat class is imported from java.text package
 
-public class BankingSystemTesting 
+public class BankingSystem
 {
     public static void main(String[] args) 
 	{
@@ -21,6 +21,9 @@ public class BankingSystemTesting
         String sFirstName3 = "", sLastName3 = "";
         String sFirstName4 = "", sLastName4 = "";
         String sFirstName5 = "", sLastName5 = "";
+		
+		//Declaring variables for client numbers
+		int iClientNumberFill1 = 0, iClientNumberFill2 = 0, iClientNumberFill3 = 0, iClientNumberFill4 = 0, iClientNumberFill5 = 0;
 
         // Declaring variables for client Phone number registration
         String sPhoneNumber1 = "", sPhoneNumber2 = "", sPhoneNumber3 = "", sPhoneNumber4 = "", sPhoneNumber5 = "";
@@ -34,7 +37,8 @@ public class BankingSystemTesting
         // Client Balances
         double rBalance1 = 0.0, rBalance2 = 0.0, rBalance3 = 0.0, rBalance4 = 0.0, rBalance5 = 0.0;
 
-        while (true) { // Start while(true)-infinite loop
+        while (true) 
+		{ // Start while(true)-infinite loop
             // Log-in and opening account
             System.out.println("+-----------------------------------+");
             System.out.println("|        UNITY FINANCIAL BANK       |");
@@ -551,163 +555,303 @@ public class BankingSystemTesting
                     System.out.println("+--------------------------------------------+");
                     iClientNumber = input.nextInt();
 
-                    // Registering client 1
-                    if (iClientNumber == 1) 
+					// Registering client 1
+					if (iClientNumber == 1) 
 					{
-                        input.nextLine();
-                        System.out.println("Enter your first name: ");
-                        sFirstName1 = input.nextLine();
-                        System.out.println("Enter your last name: ");
-                        sLastName1 = input.nextLine();
-                        System.out.println("Enter your phone numbers: ");
-                        sPhoneNumber1 = input.nextLine();
-                        System.out.println("Enter your ID number: ");
-                        sIDnumber1 = input.nextLine();
-                        System.out.println("Create PIN: ");
-                        sPINcreate = input.nextLine();
-                        System.out.println("Confirm your PIN: ");
-                        sPINregistered1 = input.nextLine();
-                        if (sPINcreate.equals(sPINregistered1)) 
+						if (iClientNumberFill1 == 1) 
 						{
-                            System.out.println("Client registration successfully");
-                        } 
-						while ( sPINcreate != sPINregistered1 )
+							System.out.println("Another client already registered under this client number");
+							System.out.println("Please choose another client number between client number 2, 3, 4 or 5");
+							iClientNumber = input.nextInt();
+						}
+
+						input.nextLine(); // Removing keyboard buffer
+						System.out.println("Enter your first name: ");
+						sFirstName1 = input.nextLine();
+						System.out.println("Enter your last name: ");
+						sLastName1 = input.nextLine();
+						System.out.println("Enter your phone number: ");
+						sPhoneNumber1 = input.nextLine();
+
+						while (sPhoneNumber1.length() != 10) 
 						{
-                            System.out.println("PINs do not match. Please try again.");
+							System.out.println("Phone number must be 10 digits");
+							System.out.println("Please re-enter your phone number");
+							sPhoneNumber1 = input.nextLine();
+						}
+
+						System.out.println("Enter your ID number: ");
+						sIDnumber1 = input.nextLine();
+
+						while (sIDnumber1.length() != 13) {
+							System.out.println("ID number must be 13 digits");
+							System.out.println("Please re-enter your ID number");
+							sIDnumber1 = input.nextLine();
+						}
+
+						System.out.println("Create PIN: ");
+						sPINcreate = input.nextLine();
+						System.out.println("Confirm your PIN: ");
+						sPINregistered1 = input.nextLine();
+
+						// PIN validation
+						while (!sPINcreate.equals(sPINregistered1)) 
+						{
+							System.out.println("PINs do not match. Please try again.");
 							System.out.println("Create PIN: ");
 							sPINcreate = input.nextLine();
 							System.out.println("Confirm your PIN: ");
 							sPINregistered1 = input.nextLine();
-							
-                        }
-                    }
+						}
+
+						System.out.println("Client registration successful");
+						System.out.println("Please log in on client number 1");
+						sPINcreate = "";
+						iClientNumberFill1++;
+						
+					 }
 					
 					//Registering client 2
-					 if (iClientNumber == 2) 
+					if (iClientNumber == 2) 
 					{
-                        input.nextLine();
-                        System.out.println("Enter your first name: ");
-                        sFirstName2 = input.nextLine();
-                        System.out.println("Enter your last name: ");
-                        sLastName2 = input.nextLine();
-                        System.out.println("Enter your phone numbers: ");
-                        sPhoneNumber2 = input.nextLine();
-                        System.out.println("Enter your ID number: ");
-                        sIDnumber2 = input.nextLine();
-                        System.out.println("Create PIN: ");
-                        sPINcreate = input.nextLine();
-                        System.out.println("Confirm your PIN: ");
-                        sPINregistered2 = input.nextLine();
-                        if (sPINcreate.equals(sPINregistered1)) 
+						if (iClientNumberFill2 == 1) 
 						{
-                            System.out.println("Client registration successfully");
-                        } 
-						while ( sPINcreate != sPINregistered2 )
+							System.out.println("Another client already registered under this client number");
+							System.out.println("Please choose another client number between client number 1, 3, 4 or 5");
+							iClientNumber = input.nextInt();
+						}
+
+						input.nextLine(); // Removing keyboard buffer
+						System.out.println("Enter your first name: ");
+						sFirstName2 = input.nextLine();
+						System.out.println("Enter your last name: ");
+						sLastName2 = input.nextLine();
+						System.out.println("Enter your phone number: ");
+						sPhoneNumber2 = input.nextLine();
+
+						while (sPhoneNumber2.length() != 10) 
 						{
-                            System.out.println("PINs do not match. Please try again.");
+							System.out.println("Phone number must be 10 digits");
+							System.out.println("Please re-enter your phone number");
+							sPhoneNumber2 = input.nextLine();
+						}
+
+						System.out.println("Enter your ID number: ");
+						sIDnumber2 = input.nextLine();
+
+						while (sIDnumber2.length() != 13) {
+							System.out.println("ID number must be 13 digits");
+							System.out.println("Please re-enter your ID number");
+							sIDnumber2 = input.nextLine();
+						}
+
+						System.out.println("Create PIN: ");
+						sPINcreate = input.nextLine();
+						System.out.println("Confirm your PIN: ");
+						sPINregistered2 = input.nextLine();
+
+						// PIN validation
+						while (!sPINcreate.equals(sPINregistered2)) 
+						{
+							System.out.println("PINs do not match. Please try again.");
 							System.out.println("Create PIN: ");
 							sPINcreate = input.nextLine();
 							System.out.println("Confirm your PIN: ");
 							sPINregistered2 = input.nextLine();
-                        }
-                    }
+						}
+
+						System.out.println("Client registration successful");
+						System.out.println("Please log in on client number 2");
+						sPINcreate = "";
+						iClientNumberFill2++;
+					 }
 					
 					//Registering client 3
-					 if (iClientNumber == 3) 
+					if (iClientNumber == 3) 
 					{
-                        input.nextLine();
-                        System.out.println("Enter your first name: ");
-                        sFirstName3 = input.nextLine();
-                        System.out.println("Enter your last name: ");
-                        sLastName3 = input.nextLine();
-                        System.out.println("Enter your phone numbers: ");
-                        sPhoneNumber3 = input.nextLine();
-                        System.out.println("Enter your ID number: ");
-                        sIDnumber3 = input.nextLine();
-                        System.out.println("Create PIN: ");
-                        sPINcreate = input.nextLine();
-                        System.out.println("Confirm your PIN: ");
-                        sPINregistered3 = input.nextLine();
-                        if (sPINcreate.equals(sPINregistered3)) 
+						if (iClientNumberFill3 == 1) 
 						{
-                            System.out.println("Client registration successfully");
-                        } 
-						while ( sPINcreate != sPINregistered3 )
+							System.out.println("Another client already registered under this client number");
+							System.out.println("Please choose another client number between client number 1, 2, 4 or 5");
+							iClientNumber = input.nextInt();
+						}
+
+						input.nextLine(); // Removing keyboard buffer
+						System.out.println("Enter your first name: ");
+						sFirstName3 = input.nextLine();
+						System.out.println("Enter your last name: ");
+						sLastName3 = input.nextLine();
+						System.out.println("Enter your phone number: ");
+						sPhoneNumber3 = input.nextLine();
+
+						while (sPhoneNumber3.length() != 10) 
 						{
-                            System.out.println("PINs do not match. Please try again.");
+							System.out.println("Phone number must be 10 digits");
+							System.out.println("Please re-enter your phone number");
+							sPhoneNumber3 = input.nextLine();
+						}
+
+						System.out.println("Enter your ID number: ");
+						sIDnumber3 = input.nextLine();
+
+						while (sIDnumber3.length() != 13) {
+							System.out.println("ID number must be 13 digits");
+							System.out.println("Please re-enter your ID number");
+							sIDnumber3 = input.nextLine();
+						}
+
+						System.out.println("Create PIN: ");
+						sPINcreate = input.nextLine();
+						System.out.println("Confirm your PIN: ");
+						sPINregistered3 = input.nextLine();
+
+						// PIN validation
+						while (!sPINcreate.equals(sPINregistered3)) 
+						{
+							System.out.println("PINs do not match. Please try again.");
 							System.out.println("Create PIN: ");
 							sPINcreate = input.nextLine();
 							System.out.println("Confirm your PIN: ");
 							sPINregistered3 = input.nextLine();
-                        }
-                    }
+						}
+
+						System.out.println("Client registration successful");
+						System.out.println("Please log in on client number 3");
+						sPINcreate = "";
+						iClientNumberFill3++;
+					 }
 					
 					//Registering client 4
-					 if (iClientNumber == 4) 
+					if (iClientNumber == 4) 
 					{
-                        input.nextLine();
-                        System.out.println("Enter your first name: ");
-                        sFirstName4 = input.nextLine();
-                        System.out.println("Enter your last name: ");
-                        sLastName4 = input.nextLine();
-                        System.out.println("Enter your phone numbers: ");
-                        sPhoneNumber4 = input.nextLine();
-                        System.out.println("Enter your ID number: ");
-                        sIDnumber4 = input.nextLine();
-                        System.out.println("Create PIN: ");
-                        sPINcreate = input.nextLine();
-                        System.out.println("Confirm your PIN: ");
-                        sPINregistered4 = input.nextLine();
-                        if (sPINcreate.equals(sPINregistered4)) 
+						if (iClientNumberFill4 == 1) 
 						{
-                            System.out.println("Client registration successfully");
-                        } 
-						while ( sPINcreate != sPINregistered4 )
+							System.out.println("Another client already registered under this client number");
+							System.out.println("Please choose another client number between client number 1, 2, 3 or 5");
+							iClientNumber = input.nextInt();
+						}
+
+						input.nextLine(); // Removing keyboard buffer
+						System.out.println("Enter your first name: ");
+						sFirstName4 = input.nextLine();
+						System.out.println("Enter your last name: ");
+						sLastName4 = input.nextLine();
+						System.out.println("Enter your phone number: ");
+						sPhoneNumber4 = input.nextLine();
+
+						while (sPhoneNumber4.length() != 10) 
 						{
-                            System.out.println("PINs do not match. Please try again.");
+							System.out.println("Phone number must be 10 digits");
+							System.out.println("Please re-enter your phone number");
+							sPhoneNumber4 = input.nextLine();
+						}
+
+						System.out.println("Enter your ID number: ");
+						sIDnumber4 = input.nextLine();
+
+						while (sIDnumber4.length() != 13) {
+							System.out.println("ID number must be 13 digits");
+							System.out.println("Please re-enter your ID number");
+							sIDnumber4 = input.nextLine();
+						}
+
+						System.out.println("Create PIN: ");
+						sPINcreate = input.nextLine();
+						System.out.println("Confirm your PIN: ");
+						sPINregistered4 = input.nextLine();
+
+						// PIN validation
+						while (!sPINcreate.equals(sPINregistered4)) 
+						{
+							System.out.println("PINs do not match. Please try again.");
 							System.out.println("Create PIN: ");
 							sPINcreate = input.nextLine();
 							System.out.println("Confirm your PIN: ");
 							sPINregistered4 = input.nextLine();
-                        }
-                    }
-					
-					//Registering client 5
-					 if (iClientNumber == 5) 
+						}
+
+						System.out.println("Client registration successful");
+						System.out.println("Please log in on client number 4");
+						sPINcreate = "";
+						iClientNumberFill4++;
+					 }
+					 
+					 //Registering client 5
+					if (iClientNumber == 5) 
 					{
-                        input.nextLine();
-                        System.out.println("Enter your first name: ");
-                        sFirstName5 = input.nextLine();
-                        System.out.println("Enter your last name: ");
-                        sLastName5 = input.nextLine();
-                        System.out.println("Enter your phone numbers: ");
-                        sPhoneNumber5 = input.nextLine();
-                        System.out.println("Enter your ID number: ");
-                        sIDnumber5 = input.nextLine();
-                        System.out.println("Create PIN: ");
-                        sPINcreate = input.nextLine();
-                        System.out.println("Confirm your PIN: ");
-                        sPINregistered5 = input.nextLine();
-                        if (sPINcreate.equals(sPINregistered5)) 
+						if (iClientNumberFill5 == 1) 
 						{
-                            System.out.println("Client registration successfully");
-                        } 
-						while ( sPINcreate != sPINregistered5 )
+							System.out.println("Another client already registered under this client number");
+							System.out.println("Please choose another client number between client number 1, 2, 3 or 4");
+							iClientNumber = input.nextInt();
+						}
+
+						input.nextLine(); // Removing keyboard buffer
+						System.out.println("Enter your first name: ");
+						sFirstName5 = input.nextLine();
+						System.out.println("Enter your last name: ");
+						sLastName5 = input.nextLine();
+						System.out.println("Enter your phone number: ");
+						sPhoneNumber5 = input.nextLine();
+
+						while (sPhoneNumber5.length() != 10) 
 						{
-                            System.out.println("PINs do not match. Please try again.");
+							System.out.println("Phone number must be 10 digits");
+							System.out.println("Please re-enter your phone number");
+							sPhoneNumber5 = input.nextLine();
+						}
+
+						System.out.println("Enter your ID number: ");
+						sIDnumber5 = input.nextLine();
+
+						while (sIDnumber5.length() != 13) {
+							System.out.println("ID number must be 13 digits");
+							System.out.println("Please re-enter your ID number");
+							sIDnumber5 = input.nextLine();
+						}
+
+						System.out.println("Create PIN: ");
+						sPINcreate = input.nextLine();
+						System.out.println("Confirm your PIN: ");
+						sPINregistered5 = input.nextLine();
+
+						// PIN validation
+						while (!sPINcreate.equals(sPINregistered5)) 
+						{
+							System.out.println("PINs do not match. Please try again.");
 							System.out.println("Create PIN: ");
 							sPINcreate = input.nextLine();
 							System.out.println("Confirm your PIN: ");
 							sPINregistered5 = input.nextLine();
-                        }
-                    }
+						}
+
+						System.out.println("Client registration successful");
+						System.out.println("Please log in on client number 4");
+						sPINcreate = "";
+						iClientNumberFill5++;
+					 }
+					 if ( (iClientNumberFill1 == 1 ) && ( iClientNumberFill2 == 1 ) && ( iClientNumberFill3 == 1 ) && ( iClientNumberFill4 == 1 ) && ( iClientNumberFill5 == 1 ) )
+					{
+						System.out.println("Maximum number of clients registered");
+						System.out.println("Cannot register more clients");
+						System.out.println("+-----------------------------------+");
+						System.out.println("|        UNITY FINANCIAL BANK       |");
+						System.out.println("|-----------------------------------|");
+						System.out.println("|\tSELECT AN OPERATION BELOW   |");
+						System.out.println("|-----------------------------------|");
+						System.out.println("|\t1 <---- login               |");
+						System.out.println("|\t2 <---- Open account        |");
+						System.out.println("+-----------------------------------+");
+						iOperation = input.nextInt();
+					}
 					break;
 
                 default:
-                    System.out.println("Invalid operation!");
+                    System.out.println("Invalid Option!");
 					System.out.println("Please try again");
 					iOperation = input.nextInt();
             } // End switch
+			
         } // End while(true)-infinite loop
     }
 }
