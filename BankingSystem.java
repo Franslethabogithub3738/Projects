@@ -481,15 +481,15 @@ public class BankingSystemTesting
 
                                         case 2:
                                             System.out.println("Enter the deposit Amount: ");
-                                            double rDeposit4 = input.nextDouble();
-                                            rBalance4 = rBalance4 + rDeposit4;
+                                            double rDeposit5 = input.nextDouble();
+                                            rBalance5 = rBalance5 + rDeposit5;
                                             System.out.println("Amount deposited : " + formatter.format(rDeposit5));
                                             System.out.println("Available Balance: " + formatter.format(rBalance5));
                                             break;
 
                                         case 3:
                                             System.out.println("Enter amount you want to withdraw: ");
-                                            double rWithdrawAmount4 = input.nextDouble();
+                                            double rWithdrawAmount5 = input.nextDouble();
                                             if (rWithdrawAmount5 > 0 && rWithdrawAmount5 <= rBalance5) 
 											{
                                                 rBalance5 = rBalance5 - rWithdrawAmount5;
@@ -502,7 +502,7 @@ public class BankingSystemTesting
 												System.out.println("Please try again..!");
 												rWithdrawAmount5 = input.nextDouble();
                                             } 
-											while ( rWithdrawAmount4 < 0 )
+											while ( rWithdrawAmount5 < 0 )
 											{
                                                 System.out.println("Invalid withdrawal amount! Please enter a positive value.");
 												rWithdrawAmount5 = input.nextDouble();
@@ -521,7 +521,7 @@ public class BankingSystemTesting
                                     }
 
                                     // Exit the loop if the user chooses to log out
-                                    if (iOperation4 == 4) 
+                                    if (iOperation5 == 4) 
 									{
                                         break;
                                     }
