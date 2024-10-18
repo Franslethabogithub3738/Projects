@@ -1,7 +1,7 @@
 import java.util.Scanner; // Scanner class is imported from java.util package
 import java.text.DecimalFormat; // DecimalFormat class is imported from java.text package
 
-public class BankingSystem
+public class BankingSystemTesting 
 {
     public static void main(String[] args) 
 	{
@@ -14,6 +14,10 @@ public class BankingSystem
         String sPINregistered1 = "", sPINregistered2 = "", sPINregistered3 = "", sPINregistered4 = "", sPINregistered5 = "";
         String sPhoneNumbersRegistered1 = "", sPhoneNumbersRegistered2 = "", sPhoneNumbersRegistered3 = "", sPhoneNumbersRegistered4 = "", sPhoneNumbersRegistered5 = "";
         int iClientNumber;
+		
+		//Declare variables for daily reports
+		int iNumDeposit1 = 0, iNumDeposit2 = 0, iNumDeposit3 = 0, iNumDeposit4 = 0, iNumDeposit5 = 0;
+		int iNumWithdraw1 = 0, iNumWithdraw2 = 0, iNumWithdraw3 = 0,  iNumWithdraw4 = 0,  iNumWithdraw5 = 0;
 
         // Declaring variables for client names registration
         String sFirstName1 = "", sLastName1 = "";
@@ -78,7 +82,8 @@ public class BankingSystem
                                 System.out.println("Login successful");
 
                                 // Loop to keep the client logged in until they choose to exit
-                                while (true) {
+                                while (true) 
+								{
                                     System.out.println("+------------------------------------------+");
                                     System.out.println("|\tACCOUNT MANAGEMENT                 |");
                                     System.out.println("|------------------------------------------|");
@@ -87,7 +92,9 @@ public class BankingSystem
                                     System.out.println("|\t1 <---- Balance                    |");
                                     System.out.println("|\t2 <---- Deposit                    |");
                                     System.out.println("|\t3 <---- Withdraw                   |");
-                                    System.out.println("|\t4 <---- Exit                       |");
+									System.out.println("|\t4 <---- Daily Report               |");
+                                    System.out.println("|\t5 <---- Log out                    |");
+									System.out.println("|\t6 <---- Close account              |");
                                     System.out.println("+------------------------------------------+");
                                     int iOperation1 = input.nextInt();
 
@@ -104,33 +111,79 @@ public class BankingSystem
                                             rBalance1 = rBalance1 + rDeposit1;
                                             System.out.println("Amount deposited : " + formatter.format(rDeposit1));
                                             System.out.println("Available Balance: " + formatter.format(rBalance1));
+											iNumDeposit1++;
                                             break;
 
                                         case 3:
-                                            System.out.println("Enter amount you want to withdraw: ");
-                                            double rWithdrawAmount1 = input.nextDouble();
-                                            if (rWithdrawAmount1 > 0 && rWithdrawAmount1 <= rBalance1) 
-											{
-                                                rBalance1 = rBalance1 - rWithdrawAmount1;
-                                                System.out.println("Amount withdrawn: " + formatter.format(rWithdrawAmount1));
-                                                System.out.println("Available balance: " + formatter.format(rBalance1));
-                                            } 
-											while (rWithdrawAmount1 > rBalance1) 
-											{
-                                                System.out.println("Insufficient balance! Unable to withdraw the requested amount.");
-												System.out.println("Please try again..!");
-												rWithdrawAmount1 = input.nextDouble();
-                                            } 
-											while ( rWithdrawAmount1 < 0 )
-											{
-                                                System.out.println("Invalid withdrawal amount! Please enter a positive value.");
-												rWithdrawAmount1 = input.nextDouble();
-											}
-                                            break;
+											System.out.println("Enter amount you want to withdraw: ");
+											double rWithdrawAmount1 = input.nextDouble();
 
-                                        case 4:
-                                            System.out.println("Logging out...");
-                                            break;
+											if (rWithdrawAmount1 <= 0) 
+											{
+												System.out.println("Invalid withdrawal amount! Please enter a positive value.");
+											} 
+											else if (rWithdrawAmount1 > rBalance1) {
+												System.out.println("Insufficient balance! Unable to withdraw the requested amount.");
+											} else 
+											{
+												rBalance1 -= rWithdrawAmount1;
+												System.out.println("Amount withdrawn: " + formatter.format(rWithdrawAmount1));
+												System.out.println("Available balance: " + formatter.format(rBalance1));
+												iNumWithdraw1++;
+											}
+										break;
+														 
+										
+										case 4:
+											System.out.println("+-----------------------------------------------------+");
+											System.out.println("|\t\t\t DAILY REPORT");
+											System.out.println("|-----------------------------------------------------|");
+											System.out.println("| Name:\t\t\t" + sFirstName1);
+											System.out.println("| Surname:\t\t" + sLastName1);
+											System.out.println("| ID Number:\t\t" + sIDnumber1);
+											System.out.println("|-----------------------------------------------------|");
+											System.out.println("| Number of Deposits:   \t" + iNumDeposit1);
+											System.out.println("| Number of Withdrawals:   \t" + iNumWithdraw1);
+											System.out.println("| Available Balance:        \t" + formatter.format(rBalance1));
+											System.out.println("+-----------------------------------------------------+");
+										break;
+
+                                        case 5:
+                                            System.out.println("Logged out successfully\n");
+											System.out.println("+-----------------------------------+");
+											System.out.println("|        UNITY FINANCIAL BANK       |");
+											System.out.println("|-----------------------------------|");
+											System.out.println("|\tSELECT AN OPERATION BELOW   |");
+											System.out.println("|-----------------------------------|");
+											System.out.println("|\t1 <---- login               |");
+											System.out.println("|\t2 <---- Open account        |");
+											System.out.println("+-----------------------------------+");
+											iOperation = input.nextInt();
+										break;
+											
+										case 6:
+											System.out.println("Your account has been closed successfully");
+											sFirstName1 = " ";
+											sLastName1 = " ";
+											rBalance1 = 0;
+											rWithdrawAmount1 = 0;
+											rDeposit1 = 0;
+											sIDnumber1 = " ";
+											iClientNumberFill1 --;
+											sPhoneNumber1 = " ";
+											sPINregistered1 = " ";
+											iNumDeposit1 = 0;
+											iNumWithdraw1 = 0;
+											System.out.println("+-----------------------------------+");
+											System.out.println("|        UNITY FINANCIAL BANK       |");
+											System.out.println("|-----------------------------------|");
+											System.out.println("|\tSELECT AN OPERATION BELOW   |");
+											System.out.println("|-----------------------------------|");
+											System.out.println("|\t1 <---- login               |");
+											System.out.println("|\t2 <---- Open account        |");
+											System.out.println("+-----------------------------------+");
+											iOperation = input.nextInt();
+										break;
 
                                         default:
                                             System.out.println("Invalid option");
@@ -184,7 +237,9 @@ public class BankingSystem
                                     System.out.println("|\t1 <---- Balance                    |");
                                     System.out.println("|\t2 <---- Deposit                    |");
                                     System.out.println("|\t3 <---- Withdraw                   |");
-                                    System.out.println("|\t4 <---- Exit                       |");
+									System.out.println("|\t4 <----- Daily Report               |");
+                                    System.out.println("|\t5 <---- log out                    |");
+									System.out.println("|\t6 <---- Close Account              |");
                                     System.out.println("+------------------------------------------+");
                                     int iOperation2 = input.nextInt();
 
@@ -201,16 +256,19 @@ public class BankingSystem
                                             rBalance2 = rBalance2 + rDeposit2;
                                             System.out.println("Amount deposited : " + formatter.format(rDeposit2));
                                             System.out.println("Available Balance: " + formatter.format(rBalance2));
+											iNumDeposit2++;
                                             break;
 
                                         case 3:
                                             System.out.println("Enter amount you want to withdraw: ");
                                             double rWithdrawAmount2 = input.nextDouble();
-                                            if (rWithdrawAmount2 > 0 && rWithdrawAmount2 <= rBalance2) 
+                                            while (rWithdrawAmount2 > 0 && rWithdrawAmount2 <= rBalance2) 
 											{
                                                 rBalance2 = rBalance2 - rWithdrawAmount2;
                                                 System.out.println("Amount withdrawn: " + formatter.format(rWithdrawAmount2));
                                                 System.out.println("Available balance: " + formatter.format(rBalance2));
+												rWithdrawAmount2 = input.nextDouble();
+												iNumWithdraw2++;
                                             } 
 											while (rWithdrawAmount2 > rBalance2) 
 											{
@@ -224,10 +282,48 @@ public class BankingSystem
 												rWithdrawAmount2 = input.nextDouble();
 											}
                                             break;
+											
+										case 4:
+											System.out.println("+-----------------------------------------------------+");
+											System.out.println("|\t\t\t DAILY REPORT");
+											System.out.println("|-----------------------------------------------------|");
+											System.out.println("| Name:\t\t\t" + sFirstName2);
+											System.out.println("| Surname:\t\t" + sLastName2);
+											System.out.println("| ID Number:\t\t" + sIDnumber2);
+											System.out.println("|-----------------------------------------------------|");
+											System.out.println("| Number of Deposits:   \t" + iNumDeposit2);
+											System.out.println("| Number of Withdrawals:   \t" + iNumWithdraw2);
+											System.out.println("| Available Balance:        \t" + formatter.format(rBalance2));
+											System.out.println("+-----------------------------------------------------+");
+										break;
 
-                                        case 4:
-                                            System.out.println("Logging out...");
-                                            break;
+                                        case 5:
+                                            System.out.println("Logged out successfully");
+                                        break;
+											
+										case 6:
+											System.out.println("Your account has been closed successfully");
+											sFirstName2 = " ";
+											sLastName2 = " ";
+											rBalance2 = 0;
+											rWithdrawAmount2 = 0;
+											rDeposit2 = 0;
+											sIDnumber2 = " ";
+											iClientNumberFill2 --;
+											sPhoneNumber2 = " ";
+											sPINregistered2 = " ";
+											iNumDeposit2 = 0;
+											iNumWithdraw2 = 0;
+											System.out.println("+-----------------------------------+");
+											System.out.println("|        UNITY FINANCIAL BANK       |");
+											System.out.println("|-----------------------------------|");
+											System.out.println("|\tSELECT AN OPERATION BELOW   |");
+											System.out.println("|-----------------------------------|");
+											System.out.println("|\t1 <---- login               |");
+											System.out.println("|\t2 <---- Open account        |");
+											System.out.println("+-----------------------------------+");
+											iOperation = input.nextInt();
+											break;
 
                                         default:
                                             System.out.println("Invalid option");
@@ -280,7 +376,9 @@ public class BankingSystem
                                     System.out.println("|\t1 <---- Balance                    |");
                                     System.out.println("|\t2 <---- Deposit                    |");
                                     System.out.println("|\t3 <---- Withdraw                   |");
-                                    System.out.println("|\t4 <---- Exit                       |");
+									System.out.println("|\t4 <---- Daily Report              |");
+                                    System.out.println("|\t5 <---- Logout                     |");
+									System.out.println("|\t6 <---- Close Account              |");
                                     System.out.println("+------------------------------------------+");
                                     int iOperation3 = input.nextInt();
 
@@ -297,6 +395,7 @@ public class BankingSystem
                                             rBalance3 = rBalance3 + rDeposit3;
                                             System.out.println("Amount deposited : " + formatter.format(rDeposit3));
                                             System.out.println("Available Balance: " + formatter.format(rBalance3));
+											iNumDeposit3++;
                                             break;
 
                                         case 3:
@@ -307,6 +406,7 @@ public class BankingSystem
                                                 rBalance3 = rBalance3 - rWithdrawAmount3;
                                                 System.out.println("Amount withdrawn: " + formatter.format(rWithdrawAmount3));
                                                 System.out.println("Available balance: " + formatter.format(rBalance3));
+												iNumWithdraw3++;
                                             } 
 											while (rWithdrawAmount3 > rBalance3) 
 											{
@@ -320,10 +420,48 @@ public class BankingSystem
 												rWithdrawAmount3 = input.nextDouble();
 											}
                                             break;
-
-                                        case 4:
-                                            System.out.println("Logging out...");
-                                            break;
+										
+										case 4:
+											System.out.println("+-----------------------------------------------------+");
+											System.out.println("|\t\t\t DAILY REPORT");
+											System.out.println("|-----------------------------------------------------|");
+											System.out.println("| Name:\t\t\t" + sFirstName3);
+											System.out.println("| Surname:\t\t" + sLastName3);
+											System.out.println("| ID Number:\t\t" + sIDnumber3);
+											System.out.println("|-----------------------------------------------------|");
+											System.out.println("| Number of Deposits:   \t" + iNumDeposit3);
+											System.out.println("| Number of Withdrawals:   \t" + iNumWithdraw3);
+											System.out.println("| Available Balance:        \t" + formatter.format(rBalance3));
+											System.out.println("+-----------------------------------------------------+");
+										break;
+											
+										case 5: 
+											System.out.println("Logged out successfully");
+										break;
+										
+                                        case 6:
+											System.out.println("Your account has been closed successfully\n");
+											sFirstName3 = " ";
+											sLastName3 = " ";
+											rBalance3 = 0;
+											rWithdrawAmount3 = 0;
+											rDeposit3 = 0;
+											sIDnumber3 = " ";
+											iClientNumberFill3 --;
+											sPhoneNumber3 = " ";
+											sPINregistered3 = " ";
+											iNumDeposit3 = 0;
+											iNumWithdraw3 = 0;
+											System.out.println("+-----------------------------------+");
+											System.out.println("|        UNITY FINANCIAL BANK       |");
+											System.out.println("|-----------------------------------|");
+											System.out.println("|\tSELECT AN OPERATION BELOW   |");
+											System.out.println("|-----------------------------------|");
+											System.out.println("|\t1 <---- login               |");
+											System.out.println("|\t2 <---- Open account        |");
+											System.out.println("+-----------------------------------+");
+											iOperation = input.nextInt();
+										break;
 
                                         default:
                                             System.out.println("Invalid option");
@@ -376,7 +514,9 @@ public class BankingSystem
                                     System.out.println("|\t1 <---- Balance                    |");
                                     System.out.println("|\t2 <---- Deposit                    |");
                                     System.out.println("|\t3 <---- Withdraw                   |");
-                                    System.out.println("|\t4 <---- Exit                       |");
+									System.out.println("|\t4 <---- Daily Report               |");
+                                    System.out.println("|\t5 <---- logout                    |");
+									System.out.println("|\t6 <-----Close Account             |");
                                     System.out.println("+------------------------------------------+");
                                     int iOperation4 = input.nextInt();
 
@@ -393,6 +533,7 @@ public class BankingSystem
                                             rBalance4 = rBalance4 + rDeposit4;
                                             System.out.println("Amount deposited : " + formatter.format(rDeposit4));
                                             System.out.println("Available Balance: " + formatter.format(rBalance4));
+											iNumDeposit4++;
                                             break;
 
                                         case 3:
@@ -403,6 +544,7 @@ public class BankingSystem
                                                 rBalance4 = rBalance4 - rWithdrawAmount4;
                                                 System.out.println("Amount withdrawn: " + formatter.format(rWithdrawAmount4));
                                                 System.out.println("Available balance: " + formatter.format(rBalance4));
+												iNumWithdraw4++;
                                             } 
 											while (rWithdrawAmount4 > rBalance4) 
 											{
@@ -416,10 +558,48 @@ public class BankingSystem
 												rWithdrawAmount4 = input.nextDouble();
 											}
                                             break;
+											
+										case 4:
+											System.out.println("+-----------------------------------------------------+");
+											System.out.println("|\t\t\t DAILY REPORT");
+											System.out.println("|-----------------------------------------------------|");
+											System.out.println("| Name:\t\t\t" + sFirstName4);
+											System.out.println("| Surname:\t\t" + sLastName4);
+											System.out.println("| ID Number:\t\t" + sIDnumber4);
+											System.out.println("|-----------------------------------------------------|");
+											System.out.println("| Number of Deposits:   \t" + iNumDeposit4);
+											System.out.println("| Number of Withdrawals:   \t" + iNumWithdraw4);
+											System.out.println("| Available Balance:        \t" + formatter.format(rBalance4));
+											System.out.println("+-----------------------------------------------------+");
+										break;
 
-                                        case 4:
-                                            System.out.println("Logged out...");
-                                            break;
+                                        case 5:
+                                            System.out.println("Logged out successfully");
+                                        break;
+										
+										case 6:
+											System.out.println("Your account has been closed successfully");
+											sFirstName4 = " ";
+											sLastName4 = " ";
+											rBalance4 = 0;
+											rWithdrawAmount4 = 0;
+											rDeposit4 = 0;
+											sIDnumber4 = " ";
+											iClientNumberFill4 --;
+											sPhoneNumber4 = " ";
+											sPINregistered4 = " ";
+											iNumDeposit4 = 0;
+											iNumWithdraw4 = 0;
+											System.out.println("+-----------------------------------+");
+											System.out.println("|        UNITY FINANCIAL BANK       |");
+											System.out.println("|-----------------------------------|");
+											System.out.println("|\tSELECT AN OPERATION BELOW   |");
+											System.out.println("|-----------------------------------|");
+											System.out.println("|\t1 <---- login               |");
+											System.out.println("|\t2 <---- Open account        |");
+											System.out.println("+-----------------------------------+");
+											iOperation = input.nextInt();
+										break;
 
                                         default:
                                             System.out.println("Invalid option");
@@ -489,6 +669,7 @@ public class BankingSystem
                                             rBalance5 = rBalance5 + rDeposit5;
                                             System.out.println("Amount deposited : " + formatter.format(rDeposit5));
                                             System.out.println("Available Balance: " + formatter.format(rBalance5));
+											iNumDeposit5++;
                                             break;
 
                                         case 3:
@@ -499,6 +680,7 @@ public class BankingSystem
                                                 rBalance5 = rBalance5 - rWithdrawAmount5;
                                                 System.out.println("Amount withdrawn: " + formatter.format(rWithdrawAmount5));
                                                 System.out.println("Available balance: " + formatter.format(rBalance5));
+												iNumWithdraw5++;
                                             } 
 											while (rWithdrawAmount5 > rBalance5) 
 											{
@@ -512,10 +694,48 @@ public class BankingSystem
 												rWithdrawAmount5 = input.nextDouble();
 											}
                                             break;
+											
+										case 4:
+											System.out.println("+-----------------------------------------------------+");
+											System.out.println("|\t\t\t DAILY REPORT");
+											System.out.println("|-----------------------------------------------------|");
+											System.out.println("| Name:\t\t\t" + sFirstName5);
+											System.out.println("| Surname:\t\t" + sLastName5);
+											System.out.println("| ID Number:\t\t" + sIDnumber5);
+											System.out.println("|-----------------------------------------------------|");
+											System.out.println("| Number of Deposits:   \t" + iNumDeposit5);
+											System.out.println("| Number of Withdrawals:   \t" + iNumWithdraw5);
+											System.out.println("| Available Balance:        \t" + formatter.format(rBalance5));
+											System.out.println("+-----------------------------------------------------+");
+										break;
 
-                                        case 4:
+                                        case 5:
                                             System.out.println("Logged out...");
                                             break;
+											
+										case 6:
+											System.out.println("Your account has been closed successfully");
+											sFirstName5 = " ";
+											sLastName5 = " ";
+											rBalance5 = 0;
+											rWithdrawAmount5 = 0;
+											rDeposit5 = 0;
+											sIDnumber5 = " ";
+											iClientNumberFill5 --;
+											sPhoneNumber5 = " ";
+											sPINregistered5 = " ";
+											iNumDeposit5 = 0;
+											iNumWithdraw5 = 0;
+											System.out.println("+-----------------------------------+");
+											System.out.println("|        UNITY FINANCIAL BANK       |");
+											System.out.println("|-----------------------------------|");
+											System.out.println("|\tSELECT AN OPERATION BELOW   |");
+											System.out.println("|-----------------------------------|");
+											System.out.println("|\t1 <---- login               |");
+											System.out.println("|\t2 <---- Open account        |");
+											System.out.println("+-----------------------------------+");
+											iOperation = input.nextInt();
+										break;
 
                                         default:
                                             System.out.println("Invalid option");
@@ -639,7 +859,8 @@ public class BankingSystem
 						System.out.println("Enter your ID number: ");
 						sIDnumber2 = input.nextLine();
 
-						while (sIDnumber2.length() != 13) {
+						while (sIDnumber2.length() != 13) 
+						{
 							System.out.println("ID number must be 13 digits");
 							System.out.println("Please re-enter your ID number");
 							sIDnumber2 = input.nextLine();
@@ -661,7 +882,7 @@ public class BankingSystem
 						}
 
 						System.out.println("Client registration successful");
-						System.out.println("Please log in on client number 2");
+						System.out.println("Please log in on client number 1");
 						sPINcreate = "";
 						iClientNumberFill2++;
 					 }
@@ -694,7 +915,8 @@ public class BankingSystem
 						System.out.println("Enter your ID number: ");
 						sIDnumber3 = input.nextLine();
 
-						while (sIDnumber3.length() != 13) {
+						while (sIDnumber3.length() != 13) 
+						{
 							System.out.println("ID number must be 13 digits");
 							System.out.println("Please re-enter your ID number");
 							sIDnumber3 = input.nextLine();
@@ -716,7 +938,7 @@ public class BankingSystem
 						}
 
 						System.out.println("Client registration successful");
-						System.out.println("Please log in on client number 3");
+						System.out.println("Please log in on client number 1");
 						sPINcreate = "";
 						iClientNumberFill3++;
 					 }
@@ -771,7 +993,7 @@ public class BankingSystem
 						}
 
 						System.out.println("Client registration successful");
-						System.out.println("Please log in on client number 4");
+						System.out.println("Please log in on client number 1");
 						sPINcreate = "";
 						iClientNumberFill4++;
 					 }
@@ -826,7 +1048,7 @@ public class BankingSystem
 						}
 
 						System.out.println("Client registration successful");
-						System.out.println("Please log in on client number 4");
+						System.out.println("Please log in on client number 1");
 						sPINcreate = "";
 						iClientNumberFill5++;
 					 }
@@ -834,15 +1056,6 @@ public class BankingSystem
 					{
 						System.out.println("Maximum number of clients registered");
 						System.out.println("Cannot register more clients");
-						System.out.println("+-----------------------------------+");
-						System.out.println("|        UNITY FINANCIAL BANK       |");
-						System.out.println("|-----------------------------------|");
-						System.out.println("|\tSELECT AN OPERATION BELOW   |");
-						System.out.println("|-----------------------------------|");
-						System.out.println("|\t1 <---- login               |");
-						System.out.println("|\t2 <---- Open account        |");
-						System.out.println("+-----------------------------------+");
-						iOperation = input.nextInt();
 					}
 					break;
 
