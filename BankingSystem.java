@@ -40,7 +40,13 @@ public class BankingSystemTesting
 
         // Client Balances
         double rBalance1 = 0.0, rBalance2 = 0.0, rBalance3 = 0.0, rBalance4 = 0.0, rBalance5 = 0.0;
+		
+		//This boolean variable keeps the user logged in until the user logs out and closes an account
+		boolean keepLogIn = true;
 
+		//The following declared boolean variables exit a loop for client login when the user enters an incorrect login credentials and when you do not have an account
+		boolean ClientOneLogin = true, ClientTwoLogin = true, ClientThreeLogin = true, ClientFourLogin = true, ClientFiveLogin = true;
+		
         while (true) 
 		{ // Start while(true)-infinite loop
             // Log-in and opening account
@@ -67,73 +73,86 @@ public class BankingSystemTesting
                     iClientNumber = input.nextInt();
 
                     // Client 1 log in
-                    if (iClientNumber == 1) 
-					{ // Start operations for client 1
-                        while (true) 
+					if (iClientNumber == 1) 
+					{ 
+						// Start operations for client 1
+						while (ClientOneLogin) 
 						{
-                            input.nextLine();
-                            System.out.println("You will provide your phone numbers and PIN to prove you are client 1");
-                            System.out.println("Enter phone numbers: ");
-                            String sPhoneNumbers = input.nextLine();
-                            System.out.println("Enter PIN: ");
-                            String sPIN = input.nextLine();
-                            if (sPhoneNumbers.equals(sPhoneNumber1) && sPIN.equals(sPINregistered1)) 
+							input.nextLine();
+							System.out.println("You will provide your phone numbers and PIN to prove you are client 1");
+							System.out.println("Enter phone numbers: ");
+							String sPhoneNumbers = input.nextLine();
+							System.out.println("Enter PIN: ");
+							String sPIN = input.nextLine();
+							
+							if (sPhoneNumbers.equals(sPhoneNumber1) && sPIN.equals(sPINregistered1)) //Error control 
 							{
-                                System.out.println("Login successful");
+								System.out.println("Login successful");
 
-                                // Loop to keep the client logged in until they choose to exit
-                                while (true) 
+								// Loop to keep the client logged in until they choose to exit
+								while (keepLogIn) 
 								{
-                                    System.out.println("+------------------------------------------+");
-                                    System.out.println("|\tACCOUNT MANAGEMENT                 |");
-                                    System.out.println("|------------------------------------------|");
-                                    System.out.println("|\tSELECT ONE OF THE OPTIONS BELOW    |");
-                                    System.out.println("|------------------------------------------|");
-                                    System.out.println("|\t1 <---- Balance                    |");
-                                    System.out.println("|\t2 <---- Deposit                    |");
-                                    System.out.println("|\t3 <---- Withdraw                   |");
+									System.out.println("+------------------------------------------+");
+									System.out.println("|\tACCOUNT MANAGEMENT                 |");
+									System.out.println("|------------------------------------------|");
+									System.out.println("|\tSELECT ONE OF THE OPTIONS BELOW    |");
+									System.out.println("|------------------------------------------|");
+									System.out.println("|\t1 <---- Balance                    |");
+									System.out.println("|\t2 <---- Deposit                    |");
+									System.out.println("|\t3 <---- Withdraw                   |");
 									System.out.println("|\t4 <---- Daily Report               |");
-                                    System.out.println("|\t5 <---- Log out                    |");
+									System.out.println("|\t5 <---- Log out                    |");
 									System.out.println("|\t6 <---- Close account              |");
-                                    System.out.println("+------------------------------------------+");
-                                    int iOperation1 = input.nextInt();
+									System.out.println("+------------------------------------------+");
+									int iOperation1 = input.nextInt();
 
-                                    // Client 1 transactions
-                                    switch (iOperation1) 
+									// Client 1 transactions
+									switch (iOperation1) 
 									{
-                                        case 1:
-                                            System.out.println("Balance: " + formatter.format(rBalance1));
-                                            break;
+										case 1:
+											System.out.println("Balance: " + formatter.format(rBalance1));
+										break;
 
-                                        case 2:
-                                            System.out.println("Enter the deposit Amount: ");
-                                            double rDeposit1 = input.nextDouble();
-                                            rBalance1 = rBalance1 + rDeposit1;
-                                            System.out.println("Amount deposited : " + formatter.format(rDeposit1));
-                                            System.out.println("Available Balance: " + formatter.format(rBalance1));
+										case 2:
+											System.out.println("Enter the deposit Amount: ");
+											double rDeposit1 = input.nextDouble();
+											rBalance1 = rBalance1 + rDeposit1;
+											System.out.println("Amount deposited : " + formatter.format(rDeposit1));
+											System.out.println("Available Balance: " + formatter.format(rBalance1));
 											iNumDeposit1++;
-                                            break;
+										break;
 
-                                        case 3:
+										case 3:
 											System.out.println("Enter amount you want to withdraw: ");
 											double rWithdrawAmount1 = input.nextDouble();
+											
+											while ( rBalance1 == 0 )
+											{
+												System.out.println("You have no funds in your account. Withdrawal not possible.");
+												System.out.println("PLEASE enter 0 to continue");
+												rWithdrawAmount1 = input.nextDouble();
+												break;
+											}
 
-											if (rWithdrawAmount1 <= 0) 
+											while (rWithdrawAmount1 < 0) 
 											{
 												System.out.println("Invalid withdrawal amount! Please enter a positive value.");
-											} 
-											else if (rWithdrawAmount1 > rBalance1) {
-												System.out.println("Insufficient balance! Unable to withdraw the requested amount.");
-											} else 
-											{
-												rBalance1 -= rWithdrawAmount1;
-												System.out.println("Amount withdrawn: " + formatter.format(rWithdrawAmount1));
-												System.out.println("Available balance: " + formatter.format(rBalance1));
-												iNumWithdraw1++;
+												rWithdrawAmount1 = input.nextDouble();
 											}
+
+											while (rWithdrawAmount1 > rBalance1) 
+											{
+												System.out.println("Insufficient balance! Unable to withdraw the requested amount.");
+												System.out.println("Try again");
+												rWithdrawAmount1 = input.nextDouble();
+											}
+
+											rBalance1 -= rWithdrawAmount1;
+											System.out.println("Amount withdrawn: " + formatter.format(rWithdrawAmount1));
+											System.out.println("Available balance: " + formatter.format(rBalance1));
+											iNumWithdraw1++;
 										break;
-														 
-										
+
 										case 4:
 											System.out.println("+-----------------------------------------------------+");
 											System.out.println("|\t\t\t DAILY REPORT");
@@ -148,141 +167,146 @@ public class BankingSystemTesting
 											System.out.println("+-----------------------------------------------------+");
 										break;
 
-                                        case 5:
-                                            System.out.println("Logged out successfully\n");
-											System.out.println("+-----------------------------------+");
-											System.out.println("|        UNITY FINANCIAL BANK       |");
-											System.out.println("|-----------------------------------|");
-											System.out.println("|\tSELECT AN OPERATION BELOW   |");
-											System.out.println("|-----------------------------------|");
-											System.out.println("|\t1 <---- login               |");
-											System.out.println("|\t2 <---- Open account        |");
-											System.out.println("+-----------------------------------+");
-											iOperation = input.nextInt();
+										case 5:
+											System.out.println("Logged out successfully\n");
+											System.out.println("Thank you..Byeee..!");
 										break;
-											
+
 										case 6:
-											System.out.println("Your account has been closed successfully");
-											sFirstName1 = " ";
-											sLastName1 = " ";
-											rBalance1 = 0;
-											rWithdrawAmount1 = 0;
-											rDeposit1 = 0;
-											sIDnumber1 = " ";
-											iClientNumberFill1 --;
-											sPhoneNumber1 = " ";
-											sPINregistered1 = " ";
-											iNumDeposit1 = 0;
-											iNumWithdraw1 = 0;
-											System.out.println("+-----------------------------------+");
-											System.out.println("|        UNITY FINANCIAL BANK       |");
-											System.out.println("|-----------------------------------|");
-											System.out.println("|\tSELECT AN OPERATION BELOW   |");
-											System.out.println("|-----------------------------------|");
-											System.out.println("|\t1 <---- login               |");
-											System.out.println("|\t2 <---- Open account        |");
-											System.out.println("+-----------------------------------+");
-											iOperation = input.nextInt();
-										break;
-
-                                        default:
-                                            System.out.println("Invalid option");
-											System.out.println("Please try again");
-											iOperation1 = input.nextInt();
+										  System.out.println("DO you really want to close your account?");
+										  System.out.println("Enter <YES> to confirm");
+										  System.out.println("Enter <NO> to return to Account Management");
+										  char cAnswer1 = Character.toUpperCase(input.next().charAt(0));
+										  
+											if ( cAnswer1 == 'Y' )
+												
+											{
+												System.out.println("Your account has been closed successfully");
+												sFirstName1 = " ";
+												sLastName1 = " ";
+												rBalance1 = 0;
+												rWithdrawAmount1 = 0;
+												rDeposit1 = 0;
+												sIDnumber1 = " ";
+												iClientNumberFill1 --;
+												sPhoneNumber1 = " ";
+												sPINregistered1 = " ";
+												iNumDeposit1 = 0;
+												iNumWithdraw1 = 0;
+												keepLogIn = false;
+												break;
+												
+											}
 											
-                                    }
+											else
+											{
+												break;
+											}
 
-                                    // Exit the loop if the user chooses to log out
-                                    if (iOperation1 == 4) 
-									{
-                                        break;
-                                    }
-                                }
-                                break; // Exit login loop after the session ends
-                            } 
-							else 
-							{
-                                System.out.println("|--------------------------------------------|");
-                                System.out.println("|\tINVALID LOGIN                        |");
-                                System.out.println("|--------------------------------------------|");
-                                System.out.println("|  Enter your client number(between 1 to 5): |");
-                                System.out.println("+--------------------------------------------+");
-                                iClientNumber = input.nextInt();
-                            }
-                        }
-                    } // End-operations for client 1
+										default:
+											System.out.println("Invalid option");
+											System.out.println("Please try again");
+											break;
+									}
+
+									// Exit the loop if the user chooses to log out
+									if (iOperation1 == 5) {
+										break;
+									}
+								}
+								break; // Exit login loop after the session ends
+							} else {
+								System.out.println("|--------------------------------------------|");
+								System.out.println("|\tINVALID LOGIN                        |");
+								System.out.println("|--------------------------------------------|");
+								ClientOneLogin = false;
+								break;
+							}
+						}
+					} // End-operations for client 1
+
 					
+					// Client 2 log in
 					if (iClientNumber == 2) 
-					{ // Start operations for client 2
-                        while (true) 
+					{ 
+						// Start operations for client 2
+						while (ClientTwoLogin) 
 						{
-                            input.nextLine();
-                            System.out.println("You will provide your phone numbers and PIN to prove you are client 2");
-                            System.out.println("Enter phone numbers: ");
-                            String sPhoneNumbers = input.nextLine();
-                            System.out.println("Enter PIN: ");
-                            String sPIN = input.nextLine();
-                            if (sPhoneNumbers.equals(sPhoneNumber2) && sPIN.equals(sPINregistered2)) 
+							input.nextLine();
+							System.out.println("You will provide your phone numbers and PIN to prove you are client 2");
+							System.out.println("Enter phone numbers: ");
+							String sPhoneNumbers = input.nextLine();
+							System.out.println("Enter PIN: ");
+							String sPIN = input.nextLine();
+							
+							if (sPhoneNumbers.equals(sPhoneNumber2) && sPIN.equals(sPINregistered2)) 
 							{
-                                System.out.println("Login successful");
+								System.out.println("Login successful");
 
-                                // Loop to keep the client logged in until they choose to exit
-                                while (true) 
+								// Loop to keep the client logged in until they choose to exit
+								while (keepLogIn) 
 								{
-                                    System.out.println("+------------------------------------------+");
-                                    System.out.println("|\tACCOUNT MANAGEMENT                 |");
-                                    System.out.println("|------------------------------------------|");
-                                    System.out.println("|\tSELECT ONE OF THE OPTIONS BELOW    |");
-                                    System.out.println("|------------------------------------------|");
-                                    System.out.println("|\t1 <---- Balance                    |");
-                                    System.out.println("|\t2 <---- Deposit                    |");
-                                    System.out.println("|\t3 <---- Withdraw                   |");
-									System.out.println("|\t4 <----- Daily Report               |");
-                                    System.out.println("|\t5 <---- log out                    |");
-									System.out.println("|\t6 <---- Close Account              |");
-                                    System.out.println("+------------------------------------------+");
-                                    int iOperation2 = input.nextInt();
+									System.out.println("+------------------------------------------+");
+									System.out.println("|\tACCOUNT MANAGEMENT                 |");
+									System.out.println("|------------------------------------------|");
+									System.out.println("|\tSELECT ONE OF THE OPTIONS BELOW    |");
+									System.out.println("|------------------------------------------|");
+									System.out.println("|\t1 <---- Balance                    |");
+									System.out.println("|\t2 <---- Deposit                    |");
+									System.out.println("|\t3 <---- Withdraw                   |");
+									System.out.println("|\t4 <---- Daily Report               |");
+									System.out.println("|\t5 <---- Log out                    |");
+									System.out.println("|\t6 <---- Close account              |");
+									System.out.println("+------------------------------------------+");
+									int iOperation2 = input.nextInt();
 
-                                    // Client 2 transactions
-                                    switch (iOperation2) 
+									// Client 2 transactions
+									switch (iOperation2) 
 									{
-                                        case 1:
-                                            System.out.println("Balance: " + formatter.format(rBalance2));
-                                            break;
+										case 1:
+											System.out.println("Balance: " + formatter.format(rBalance2));
+											break;
 
-                                        case 2:
-                                            System.out.println("Enter the deposit Amount: ");
-                                            double rDeposit2 = input.nextDouble();
-                                            rBalance2 = rBalance2 + rDeposit2;
-                                            System.out.println("Amount deposited : " + formatter.format(rDeposit2));
-                                            System.out.println("Available Balance: " + formatter.format(rBalance2));
+										case 2:
+											System.out.println("Enter the deposit Amount: ");
+											double rDeposit2 = input.nextDouble();
+											rBalance2 = rBalance2 + rDeposit2;
+											System.out.println("Amount deposited : " + formatter.format(rDeposit2));
+											System.out.println("Available Balance: " + formatter.format(rBalance2));
 											iNumDeposit2++;
-                                            break;
+											break;
 
-                                        case 3:
-                                            System.out.println("Enter amount you want to withdraw: ");
-                                            double rWithdrawAmount2 = input.nextDouble();
-                                            while (rWithdrawAmount2 > 0 && rWithdrawAmount2 <= rBalance2) 
+										case 3:
+											System.out.println("Enter amount you want to withdraw: ");
+											double rWithdrawAmount2 = input.nextDouble();
+											
+											while ( rBalance2 == 0 )
 											{
-                                                rBalance2 = rBalance2 - rWithdrawAmount2;
-                                                System.out.println("Amount withdrawn: " + formatter.format(rWithdrawAmount2));
-                                                System.out.println("Available balance: " + formatter.format(rBalance2));
+												System.out.println("You have no funds in your account. Withdrawal not possible.");
+												System.out.println("PLEASE enter 0 to continue");
 												rWithdrawAmount2 = input.nextDouble();
-												iNumWithdraw2++;
-                                            } 
-											while (rWithdrawAmount2 > rBalance2) 
+												break;
+											}
+
+											while (rWithdrawAmount2 < 0) 
 											{
-                                                System.out.println("Insufficient balance! Unable to withdraw the requested amount.");
-												System.out.println("Please try again..!");
-												rWithdrawAmount2 = input.nextDouble();
-                                            } 
-											while ( rWithdrawAmount2 < 0 )
-											{
-                                                System.out.println("Invalid withdrawal amount! Please enter a positive value.");
+												System.out.println("Invalid withdrawal amount! Please enter a positive value.");
 												rWithdrawAmount2 = input.nextDouble();
 											}
-                                            break;
-											
+
+											while (rWithdrawAmount2 > rBalance2) 
+											{
+												System.out.println("Insufficient balance! Unable to withdraw the requested amount.");
+												System.out.println("Try again");
+												rWithdrawAmount2 = input.nextDouble();
+											}
+
+											rBalance2 -= rWithdrawAmount2;
+											System.out.println("Amount withdrawn: " + formatter.format(rWithdrawAmount2));
+											System.out.println("Available balance: " + formatter.format(rBalance2));
+											iNumWithdraw2++;
+										break;
+
 										case 4:
 											System.out.println("+-----------------------------------------------------+");
 											System.out.println("|\t\t\t DAILY REPORT");
@@ -297,130 +321,144 @@ public class BankingSystemTesting
 											System.out.println("+-----------------------------------------------------+");
 										break;
 
-                                        case 5:
-                                            System.out.println("Logged out successfully");
-                                        break;
-											
+										case 5:
+											System.out.println("Logged out successfully\n");
+											System.out.println("Thank you..Byeee..!");
+										break;
+
 										case 6:
-											System.out.println("Your account has been closed successfully");
-											sFirstName2 = " ";
-											sLastName2 = " ";
-											rBalance2 = 0;
-											rWithdrawAmount2 = 0;
-											rDeposit2 = 0;
-											sIDnumber2 = " ";
-											iClientNumberFill2 --;
-											sPhoneNumber2 = " ";
-											sPINregistered2 = " ";
-											iNumDeposit2 = 0;
-											iNumWithdraw2 = 0;
-											System.out.println("+-----------------------------------+");
-											System.out.println("|        UNITY FINANCIAL BANK       |");
-											System.out.println("|-----------------------------------|");
-											System.out.println("|\tSELECT AN OPERATION BELOW   |");
-											System.out.println("|-----------------------------------|");
-											System.out.println("|\t1 <---- login               |");
-											System.out.println("|\t2 <---- Open account        |");
-											System.out.println("+-----------------------------------+");
-											iOperation = input.nextInt();
-											break;
-
-                                        default:
-                                            System.out.println("Invalid option");
-											System.out.println("Please try again");
-											iOperation2 = input.nextInt();
+										  System.out.println("DO you really want to close your account?");
+										  System.out.println("Enter <YES> to confirm");
+										  System.out.println("Enter <NO> to return to Account Management");
+										  char cAnswer2 = Character.toUpperCase(input.next().charAt(0));
+										  
+											if ( cAnswer2 == 'Y' )
+												
+											{
+												System.out.println("Your account has been closed successfully");
+												sFirstName2 = " ";
+												sLastName2 = " ";
+												rBalance2 = 0;
+												rWithdrawAmount2 = 0;
+												rDeposit2 = 0;
+												sIDnumber2 = " ";
+												iClientNumberFill2 --;
+												sPhoneNumber2 = " ";
+												sPINregistered2 = " ";
+												iNumDeposit2 = 0;
+												iNumWithdraw2 = 0;
+												keepLogIn = false;
+												break;
+											}
 											
-                                    }
+											else
+											{
+												break;
+											}
 
-                                    // Exit the loop if the user chooses to log out
-                                    if (iOperation2 == 4) 
-									{
-                                        break;
-                                    }
-                                }
-                                break; // Exit login loop after the session ends
-                            } else 
-							{
-                                System.out.println("|--------------------------------------------|");
-                                System.out.println("|\tINVALID LOGIN                        |");
-                                System.out.println("|--------------------------------------------|");
-                                System.out.println("|  Enter your client number(between 1 to 5): |");
-                                System.out.println("+--------------------------------------------+");
-                                iClientNumber = input.nextInt();
-                            }
-                        }
-                    } // End-operations for client 2
+										default:
+											System.out.println("Invalid option");
+											System.out.println("Please try again");
+											break;
+									}
+
+									// Exit the loop if the user chooses to log out
+									if (iOperation2 == 5) {
+										break;
+									}
+								}
+								break; // Exit login loop after the session ends
+							} else {
+								System.out.println("|--------------------------------------------|");
+								System.out.println("|\tINVALID LOGIN                        |");
+								System.out.println("|--------------------------------------------|");
+								ClientTwoLogin = false;
+								break;
+							}
+						}
+					} // End-operations for client 2
 					
+					//Client 3 log in
 					if (iClientNumber == 3) 
-					{ // Start operations for client 3
-                        while (true) 
+					{ 
+						// Start operations for client 3
+						while (ClientThreeLogin) 
 						{
-                            input.nextLine();
-                            System.out.println("You will provide your phone numbers and PIN to prove you are client 3");
-                            System.out.println("Enter phone numbers: ");
-                            String sPhoneNumbers = input.nextLine();
-                            System.out.println("Enter PIN: ");
-                            String sPIN = input.nextLine();
-                            if (sPhoneNumbers.equals(sPhoneNumber3) && sPIN.equals(sPINregistered3)) 
+							input.nextLine();
+							System.out.println("You will provide your phone numbers and PIN to prove you are client 3");
+							System.out.println("Enter phone numbers: ");
+							String sPhoneNumbers = input.nextLine();
+							System.out.println("Enter PIN: ");
+							String sPIN = input.nextLine();
+							
+							if (sPhoneNumbers.equals(sPhoneNumber3) && sPIN.equals(sPINregistered3)) 
 							{
-                                System.out.println("Login successful");
+								System.out.println("Login successful");
 
-                                // Loop to keep the client logged in until they choose to exit
-                                while (true) 
+								// Loop to keep the client logged in until they choose to exit
+								while (keepLogIn) 
 								{
-                                    System.out.println("+------------------------------------------+");
-                                    System.out.println("|\tACCOUNT MANAGEMENT                 |");
-                                    System.out.println("|------------------------------------------|");
-                                    System.out.println("|\tSELECT ONE OF THE OPTIONS BELOW    |");
-                                    System.out.println("|------------------------------------------|");
-                                    System.out.println("|\t1 <---- Balance                    |");
-                                    System.out.println("|\t2 <---- Deposit                    |");
-                                    System.out.println("|\t3 <---- Withdraw                   |");
-									System.out.println("|\t4 <---- Daily Report              |");
-                                    System.out.println("|\t5 <---- Logout                     |");
-									System.out.println("|\t6 <---- Close Account              |");
-                                    System.out.println("+------------------------------------------+");
-                                    int iOperation3 = input.nextInt();
+									System.out.println("+------------------------------------------+");
+									System.out.println("|\tACCOUNT MANAGEMENT                 |");
+									System.out.println("|------------------------------------------|");
+									System.out.println("|\tSELECT ONE OF THE OPTIONS BELOW    |");
+									System.out.println("|------------------------------------------|");
+									System.out.println("|\t1 <---- Balance                    |");
+									System.out.println("|\t2 <---- Deposit                    |");
+									System.out.println("|\t3 <---- Withdraw                   |");
+									System.out.println("|\t4 <---- Daily Report               |");
+									System.out.println("|\t5 <---- Log out                    |");
+									System.out.println("|\t6 <---- Close account              |");
+									System.out.println("+------------------------------------------+");
+									int iOperation3 = input.nextInt();
 
-                                    // Client 3 transactions
-                                    switch (iOperation3) 
+									// Client 3 transactions
+									switch (iOperation3) 
 									{
-                                        case 1:
-                                            System.out.println("Balance: " + formatter.format(rBalance3));
-                                            break;
+										case 1:
+											System.out.println("Balance: " + formatter.format(rBalance3));
+										break;
 
-                                        case 2:
-                                            System.out.println("Enter the deposit Amount: ");
-                                            double rDeposit3 = input.nextDouble();
-                                            rBalance3 = rBalance3 + rDeposit3;
-                                            System.out.println("Amount deposited : " + formatter.format(rDeposit3));
-                                            System.out.println("Available Balance: " + formatter.format(rBalance3));
+										case 2:
+											System.out.println("Enter the deposit Amount: ");
+											double rDeposit3 = input.nextDouble();
+											rBalance3 = rBalance3 + rDeposit3;
+											System.out.println("Amount deposited : " + formatter.format(rDeposit3));
+											System.out.println("Available Balance: " + formatter.format(rBalance3));
 											iNumDeposit3++;
-                                            break;
+										break;
 
-                                        case 3:
-                                            System.out.println("Enter amount you want to withdraw: ");
-                                            double rWithdrawAmount3 = input.nextDouble();
-                                            if (rWithdrawAmount3 > 0 && rWithdrawAmount3 <= rBalance3) 
+										case 3:
+											System.out.println("Enter amount you want to withdraw: ");
+											double rWithdrawAmount3 = input.nextDouble();
+											
+											while ( rBalance3 == 0 )
 											{
-                                                rBalance3 = rBalance3 - rWithdrawAmount3;
-                                                System.out.println("Amount withdrawn: " + formatter.format(rWithdrawAmount3));
-                                                System.out.println("Available balance: " + formatter.format(rBalance3));
-												iNumWithdraw3++;
-                                            } 
-											while (rWithdrawAmount3 > rBalance3) 
-											{
-                                                System.out.println("Insufficient balance! Unable to withdraw the requested amount.");
-												System.out.println("Please try again..!");
+												System.out.println("You have no funds in your account. Withdrawal not possible.");
+												System.out.println("PLEASE enter 0 to continue");
 												rWithdrawAmount3 = input.nextDouble();
-                                            } 
-											while ( rWithdrawAmount3 < 0 )
+												break;
+											}
+
+											while (rWithdrawAmount3 < 0) 
 											{
-                                                System.out.println("Invalid withdrawal amount! Please enter a positive value.");
+												System.out.println("Invalid withdrawal amount! Please enter a positive value.");
 												rWithdrawAmount3 = input.nextDouble();
 											}
-                                            break;
-										
+
+											while (rWithdrawAmount3 > rBalance3) 
+											{
+												System.out.println("Insufficient balance! Unable to withdraw the requested amount.");
+												System.out.println("Try again");
+												rWithdrawAmount3 = input.nextDouble();
+											}
+
+											rBalance3 -= rWithdrawAmount3;
+											System.out.println("Amount withdrawn: " + formatter.format(rWithdrawAmount3));
+											System.out.println("Available balance: " + formatter.format(rBalance3));
+											iNumWithdraw3++;
+										break;
+
 										case 4:
 											System.out.println("+-----------------------------------------------------+");
 											System.out.println("|\t\t\t DAILY REPORT");
@@ -433,132 +471,145 @@ public class BankingSystemTesting
 											System.out.println("| Number of Withdrawals:   \t" + iNumWithdraw3);
 											System.out.println("| Available Balance:        \t" + formatter.format(rBalance3));
 											System.out.println("+-----------------------------------------------------+");
-										break;
-											
-										case 5: 
-											System.out.println("Logged out successfully");
-										break;
-										
-                                        case 6:
-											System.out.println("Your account has been closed successfully\n");
-											sFirstName3 = " ";
-											sLastName3 = " ";
-											rBalance3 = 0;
-											rWithdrawAmount3 = 0;
-											rDeposit3 = 0;
-											sIDnumber3 = " ";
-											iClientNumberFill3 --;
-											sPhoneNumber3 = " ";
-											sPINregistered3 = " ";
-											iNumDeposit3 = 0;
-											iNumWithdraw3 = 0;
-											System.out.println("+-----------------------------------+");
-											System.out.println("|        UNITY FINANCIAL BANK       |");
-											System.out.println("|-----------------------------------|");
-											System.out.println("|\tSELECT AN OPERATION BELOW   |");
-											System.out.println("|-----------------------------------|");
-											System.out.println("|\t1 <---- login               |");
-											System.out.println("|\t2 <---- Open account        |");
-											System.out.println("+-----------------------------------+");
-											iOperation = input.nextInt();
+											break;
+
+										case 5:
+											System.out.println("Logged out successfully\n");
 										break;
 
-                                        default:
-                                            System.out.println("Invalid option");
+										case 6:
+										  System.out.println("DO you really want to close your account?");
+										  System.out.println("Enter <YES> to confirm");
+										  System.out.println("Enter <NO> to return to Account Management");
+										  char cAnswer3 = Character.toUpperCase(input.next().charAt(0));
+										  
+											if ( cAnswer3 == 'Y' )
+												
+											{
+												System.out.println("Your account has been closed successfully");
+												sFirstName3 = " ";
+												sLastName3 = " ";
+												rBalance3 = 0;
+												rWithdrawAmount3 = 0;
+												rDeposit3 = 0;
+												sIDnumber3 = " ";
+												iClientNumberFill3 --;
+												sPhoneNumber3 = " ";
+												sPINregistered3 = " ";
+												iNumDeposit3 = 0;
+												iNumWithdraw3 = 0;
+												keepLogIn = false;
+												break;
+											}
+											
+											else
+											{
+												break;
+											}
+
+										default:
+											System.out.println("Invalid option");
 											System.out.println("Please try again");
-											iOperation3 = input.nextInt();
-											
-                                    }
+											break;
+									}
 
-                                    // Exit the loop if the user chooses to log out
-                                    if (iOperation3 == 4) 
-									{
-                                        break;
-                                    }
-                                }
-                                break; // Exit login loop after the session ends
-                            } else 
-							{
-                                System.out.println("|--------------------------------------------|");
-                                System.out.println("|\tINVALID LOGIN                        |");
-                                System.out.println("|--------------------------------------------|");
-                                System.out.println("|  Enter your client number(between 1 to 5): |");
-                                System.out.println("+--------------------------------------------+");
-                                iClientNumber = input.nextInt();
-                            }
-                        }
-                    } // End-operations for client 3
+									// Exit the loop if the user chooses to log out
+									if (iOperation3 == 5) {
+										break;
+									}
+								}
+								break; // Exit login loop after the session ends
+							} else {
+								System.out.println("|--------------------------------------------|");
+								System.out.println("|\tINVALID LOGIN                        |");
+								System.out.println("|--------------------------------------------|");
+								ClientThreeLogin = false;
+								break;
+							}
+						}
+					} // End-operations for client 3
 					
+					//Client 4 log in
 					if (iClientNumber == 4) 
-					{ // Start operations for client 3
-                        while (true) 
+					{ 
+						// Start operations for client 4
+						while (ClientFourLogin) 
 						{
-                            input.nextLine();
-                            System.out.println("You will provide your phone numbers and PIN to prove you are client 4");
-                            System.out.println("Enter phone numbers: ");
-                            String sPhoneNumbers = input.nextLine();
-                            System.out.println("Enter PIN: ");
-                            String sPIN = input.nextLine();
-                            if (sPhoneNumbers.equals(sPhoneNumber4) && sPIN.equals(sPINregistered4)) 
+							input.nextLine();
+							System.out.println("You will provide your phone numbers and PIN to prove you are client 4");
+							System.out.println("Enter phone numbers: ");
+							String sPhoneNumbers = input.nextLine();
+							System.out.println("Enter PIN: ");
+							String sPIN = input.nextLine();
+							
+							if (sPhoneNumbers.equals(sPhoneNumber4) && sPIN.equals(sPINregistered4)) 
 							{
-                                System.out.println("Login successful");
+								System.out.println("Login successful");
 
-                                // Loop to keep the client logged in until they choose to exit
-                                while (true) 
+								// Loop to keep the client logged in until they choose to exit
+								while (keepLogIn) 
 								{
-                                    System.out.println("+------------------------------------------+");
-                                    System.out.println("|\tACCOUNT MANAGEMENT                 |");
-                                    System.out.println("|------------------------------------------|");
-                                    System.out.println("|\tSELECT ONE OF THE OPTIONS BELOW    |");
-                                    System.out.println("|------------------------------------------|");
-                                    System.out.println("|\t1 <---- Balance                    |");
-                                    System.out.println("|\t2 <---- Deposit                    |");
-                                    System.out.println("|\t3 <---- Withdraw                   |");
+									System.out.println("+------------------------------------------+");
+									System.out.println("|\tACCOUNT MANAGEMENT                 |");
+									System.out.println("|------------------------------------------|");
+									System.out.println("|\tSELECT ONE OF THE OPTIONS BELOW    |");
+									System.out.println("|------------------------------------------|");
+									System.out.println("|\t1 <---- Balance                    |");
+									System.out.println("|\t2 <---- Deposit                    |");
+									System.out.println("|\t3 <---- Withdraw                   |");
 									System.out.println("|\t4 <---- Daily Report               |");
-                                    System.out.println("|\t5 <---- logout                    |");
-									System.out.println("|\t6 <-----Close Account             |");
-                                    System.out.println("+------------------------------------------+");
-                                    int iOperation4 = input.nextInt();
+									System.out.println("|\t5 <---- Log out                    |");
+									System.out.println("|\t6 <---- Close account              |");
+									System.out.println("+------------------------------------------+");
+									int iOperation4 = input.nextInt();
 
-                                    // Client 3 transactions
-                                    switch (iOperation4) 
+									// Client 4 transactions
+									switch (iOperation4) 
 									{
-                                        case 1:
-                                            System.out.println("Balance: " + formatter.format(rBalance3));
-                                            break;
+										case 1:
+											System.out.println("Balance: " + formatter.format(rBalance4));
+										break;
 
-                                        case 2:
-                                            System.out.println("Enter the deposit Amount: ");
-                                            double rDeposit4 = input.nextDouble();
-                                            rBalance4 = rBalance4 + rDeposit4;
-                                            System.out.println("Amount deposited : " + formatter.format(rDeposit4));
-                                            System.out.println("Available Balance: " + formatter.format(rBalance4));
+										case 2:
+											System.out.println("Enter the deposit Amount: ");
+											double rDeposit4 = input.nextDouble();
+											rBalance4 = rBalance4 + rDeposit4;
+											System.out.println("Amount deposited : " + formatter.format(rDeposit4));
+											System.out.println("Available Balance: " + formatter.format(rBalance4));
 											iNumDeposit4++;
-                                            break;
+										break;
 
-                                        case 3:
-                                            System.out.println("Enter amount you want to withdraw: ");
-                                            double rWithdrawAmount4 = input.nextDouble();
-                                            if (rWithdrawAmount4 > 0 && rWithdrawAmount4 <= rBalance4) 
+										case 3:
+											System.out.println("Enter amount you want to withdraw: ");
+											double rWithdrawAmount4 = input.nextDouble();
+											
+											while ( rBalance4 == 0 )
 											{
-                                                rBalance4 = rBalance4 - rWithdrawAmount4;
-                                                System.out.println("Amount withdrawn: " + formatter.format(rWithdrawAmount4));
-                                                System.out.println("Available balance: " + formatter.format(rBalance4));
-												iNumWithdraw4++;
-                                            } 
-											while (rWithdrawAmount4 > rBalance4) 
-											{
-                                                System.out.println("Insufficient balance! Unable to withdraw the requested amount.");
-												System.out.println("Please try again..!");
+												System.out.println("You have no funds in your account. Withdrawal not possible.");
+												System.out.println("PLEASE enter 0 to continue");
 												rWithdrawAmount4 = input.nextDouble();
-                                            } 
-											while ( rWithdrawAmount4 < 0 )
+												break;
+											}
+
+											while (rWithdrawAmount4 < 0) 
 											{
-                                                System.out.println("Invalid withdrawal amount! Please enter a positive value.");
+												System.out.println("Invalid withdrawal amount! Please enter a positive value.");
 												rWithdrawAmount4 = input.nextDouble();
 											}
-                                            break;
-											
+
+											while (rWithdrawAmount4 > rBalance4) 
+											{
+												System.out.println("Insufficient balance! Unable to withdraw the requested amount.");
+												System.out.println("Try again");
+												rWithdrawAmount4 = input.nextDouble();
+											}
+
+											rBalance4 -= rWithdrawAmount4;
+											System.out.println("Amount withdrawn: " + formatter.format(rWithdrawAmount4));
+											System.out.println("Available balance: " + formatter.format(rBalance4));
+											iNumWithdraw4++;
+										break;
+
 										case 4:
 											System.out.println("+-----------------------------------------------------+");
 											System.out.println("|\t\t\t DAILY REPORT");
@@ -571,130 +622,146 @@ public class BankingSystemTesting
 											System.out.println("| Number of Withdrawals:   \t" + iNumWithdraw4);
 											System.out.println("| Available Balance:        \t" + formatter.format(rBalance4));
 											System.out.println("+-----------------------------------------------------+");
+											break;
+
+										case 5:
+											System.out.println("Logged out successfully\n");
+											System.out.println("Thank you..Byeee..!");
 										break;
 
-                                        case 5:
-                                            System.out.println("Logged out successfully");
-                                        break;
-										
 										case 6:
-											System.out.println("Your account has been closed successfully");
-											sFirstName4 = " ";
-											sLastName4 = " ";
-											rBalance4 = 0;
-											rWithdrawAmount4 = 0;
-											rDeposit4 = 0;
-											sIDnumber4 = " ";
-											iClientNumberFill4 --;
-											sPhoneNumber4 = " ";
-											sPINregistered4 = " ";
-											iNumDeposit4 = 0;
-											iNumWithdraw4 = 0;
-											System.out.println("+-----------------------------------+");
-											System.out.println("|        UNITY FINANCIAL BANK       |");
-											System.out.println("|-----------------------------------|");
-											System.out.println("|\tSELECT AN OPERATION BELOW   |");
-											System.out.println("|-----------------------------------|");
-											System.out.println("|\t1 <---- login               |");
-											System.out.println("|\t2 <---- Open account        |");
-											System.out.println("+-----------------------------------+");
-											iOperation = input.nextInt();
+										  System.out.println("DO you really want to close your account?");
+										  System.out.println("Enter <YES> to confirm");
+										  System.out.println("Enter <NO> to return to Account Management");
+										  char cAnswer4 = Character.toUpperCase(input.next().charAt(0));
+										  
+											if ( cAnswer4 == 'Y' )
+												
+											{
+												System.out.println("Your account has been closed successfully");
+												sFirstName4 = " ";
+												sLastName4 = " ";
+												rBalance4 = 0;
+												rWithdrawAmount4 = 0;
+												rDeposit4 = 0;
+												sIDnumber4 = " ";
+												iClientNumberFill4 --;
+												sPhoneNumber4 = " ";
+												sPINregistered4 = " ";
+												iNumDeposit4 = 0;
+												iNumWithdraw4 = 0;
+												keepLogIn = false;
+											}
+											
+											else
+											{
+												break;
+											}
+
+										default:
+											System.out.println("Invalid option");
+											System.out.println("Please try again");
+											break;
+									}
+
+									// Exit the loop if the user chooses to log out
+									if (iOperation4 == 5) {
+										break;
+									}
+								}
+								break; // Exit login loop after the session ends
+							} else {
+								System.out.println("|--------------------------------------------|");
+								System.out.println("|\tINVALID LOGIN                        |");
+								System.out.println("|--------------------------------------------|");
+								ClientFourLogin = false;
+								break;
+							}
+						}
+					} // End-operations for client 4
+					
+					
+					//Client 5 log in
+					if (iClientNumber == 5) 
+					{ 
+						// Start operations for client 5
+						while (ClientFiveLogin) 
+						{
+							input.nextLine();
+							System.out.println("You will provide your phone numbers and PIN to prove you are client 5");
+							System.out.println("Enter phone numbers: ");
+							String sPhoneNumbers = input.nextLine();
+							System.out.println("Enter PIN: ");
+							String sPIN = input.nextLine();
+							
+							if (sPhoneNumbers.equals(sPhoneNumber5) && sPIN.equals(sPINregistered5)) 
+							{
+								System.out.println("Login successful");
+
+								// Loop to keep the client logged in until they choose to exit
+								while (true) 
+								{
+									System.out.println("+------------------------------------------+");
+									System.out.println("|\tACCOUNT MANAGEMENT                 |");
+									System.out.println("|------------------------------------------|");
+									System.out.println("|\tSELECT ONE OF THE OPTIONS BELOW    |");
+									System.out.println("|------------------------------------------|");
+									System.out.println("|\t1 <---- Balance                    |");
+									System.out.println("|\t2 <---- Deposit                    |");
+									System.out.println("|\t3 <---- Withdraw                   |");
+									System.out.println("|\t4 <---- Daily Report               |");
+									System.out.println("|\t5 <---- Log out                    |");
+									System.out.println("|\t6 <---- Close account              |");
+									System.out.println("+------------------------------------------+");
+									int iOperation5 = input.nextInt();
+
+									// Client 4 transactions
+									switch (iOperation5) 
+									{
+										case 1:
+											System.out.println("Balance: " + formatter.format(rBalance5));
 										break;
 
-                                        default:
-                                            System.out.println("Invalid option");
-											System.out.println("Please try again");
-											iOperation4 = input.nextInt();
-											
-                                    }
-
-                                    // Exit the loop if the user chooses to log out
-                                    if (iOperation4 == 4) 
-									{
-                                        break;
-                                    }
-                                }
-                                break; // Exit login loop after the session ends
-                            } else 
-							{
-                                System.out.println("|--------------------------------------------|");
-                                System.out.println("|\tINVALID LOGIN                        |");
-                                System.out.println("|--------------------------------------------|");
-                                System.out.println("|  Enter your client number(between 1 to 5): |");
-                                System.out.println("+--------------------------------------------+");
-                                iClientNumber = input.nextInt();
-                            }
-                        }
-                    } // End-operations for client 4
-					
-					if (iClientNumber == 5) 
-					{ // Start operations for client 5
-                        while (true) 
-						{
-                            input.nextLine();
-                            System.out.println("You will provide your phone numbers and PIN to prove you are client 4");
-                            System.out.println("Enter phone numbers: ");
-                            String sPhoneNumbers = input.nextLine();
-                            System.out.println("Enter PIN: ");
-                            String sPIN = input.nextLine();
-                            if (sPhoneNumbers.equals(sPhoneNumber5) && sPIN.equals(sPINregistered5)) 
-							{
-                                System.out.println("Login successful");
-
-                                // Loop to keep the client logged in until they choose to exit
-                                while (true) 
-								{
-                                    System.out.println("+------------------------------------------+");
-                                    System.out.println("|\tACCOUNT MANAGEMENT                 |");
-                                    System.out.println("|------------------------------------------|");
-                                    System.out.println("|\tSELECT ONE OF THE OPTIONS BELOW    |");
-                                    System.out.println("|------------------------------------------|");
-                                    System.out.println("|\t1 <---- Balance                    |");
-                                    System.out.println("|\t2 <---- Deposit                    |");
-                                    System.out.println("|\t3 <---- Withdraw                   |");
-                                    System.out.println("|\t4 <---- Exit                       |");
-                                    System.out.println("+------------------------------------------+");
-                                    int iOperation5 = input.nextInt();
-
-                                    // Client 5 transactions
-                                    switch (iOperation5) 
-									{
-                                        case 1:
-                                            System.out.println("Balance: " + formatter.format(rBalance5));
-                                            break;
-
-                                        case 2:
-                                            System.out.println("Enter the deposit Amount: ");
-                                            double rDeposit5 = input.nextDouble();
-                                            rBalance5 = rBalance5 + rDeposit5;
-                                            System.out.println("Amount deposited : " + formatter.format(rDeposit5));
-                                            System.out.println("Available Balance: " + formatter.format(rBalance5));
+										case 2:
+											System.out.println("Enter the deposit Amount: ");
+											double rDeposit5 = input.nextDouble();
+											rBalance5 = rBalance5 + rDeposit5;
+											System.out.println("Amount deposited : " + formatter.format(rDeposit5));
+											System.out.println("Available Balance: " + formatter.format(rBalance5));
 											iNumDeposit5++;
-                                            break;
+										break;
 
-                                        case 3:
-                                            System.out.println("Enter amount you want to withdraw: ");
-                                            double rWithdrawAmount5 = input.nextDouble();
-                                            if (rWithdrawAmount5 > 0 && rWithdrawAmount5 <= rBalance5) 
+										case 3:
+											System.out.println("Enter amount you want to withdraw: ");
+											double rWithdrawAmount5 = input.nextDouble();
+											
+											while ( rBalance5 == 0 )
 											{
-                                                rBalance5 = rBalance5 - rWithdrawAmount5;
-                                                System.out.println("Amount withdrawn: " + formatter.format(rWithdrawAmount5));
-                                                System.out.println("Available balance: " + formatter.format(rBalance5));
-												iNumWithdraw5++;
-                                            } 
-											while (rWithdrawAmount5 > rBalance5) 
-											{
-                                                System.out.println("Insufficient balance! Unable to withdraw the requested amount.");
-												System.out.println("Please try again..!");
+												System.out.println("You have no funds in your account. Withdrawal not possible.");
+												System.out.println("PLEASE enter 0 to continue");
 												rWithdrawAmount5 = input.nextDouble();
-                                            } 
-											while ( rWithdrawAmount5 < 0 )
+												break;
+											}
+
+											while (rWithdrawAmount5 < 0) 
 											{
-                                                System.out.println("Invalid withdrawal amount! Please enter a positive value.");
+												System.out.println("Invalid withdrawal amount! Please enter a positive value.");
 												rWithdrawAmount5 = input.nextDouble();
 											}
-                                            break;
-											
+
+											while (rWithdrawAmount5 > rBalance5) 
+											{
+												System.out.println("Insufficient balance! Unable to withdraw the requested amount.");
+												System.out.println("Try again");
+												rWithdrawAmount5 = input.nextDouble();
+											}
+
+											rBalance5 -= rWithdrawAmount5;
+											System.out.println("Amount withdrawn: " + formatter.format(rWithdrawAmount5));
+											System.out.println("Available balance: " + formatter.format(rBalance5));
+											iNumWithdraw5++;
+										break;
+
 										case 4:
 											System.out.println("+-----------------------------------------------------+");
 											System.out.println("|\t\t\t DAILY REPORT");
@@ -709,59 +776,61 @@ public class BankingSystemTesting
 											System.out.println("+-----------------------------------------------------+");
 										break;
 
-                                        case 5:
-                                            System.out.println("Logged out...");
-                                            break;
-											
-										case 6:
-											System.out.println("Your account has been closed successfully");
-											sFirstName5 = " ";
-											sLastName5 = " ";
-											rBalance5 = 0;
-											rWithdrawAmount5 = 0;
-											rDeposit5 = 0;
-											sIDnumber5 = " ";
-											iClientNumberFill5 --;
-											sPhoneNumber5 = " ";
-											sPINregistered5 = " ";
-											iNumDeposit5 = 0;
-											iNumWithdraw5 = 0;
-											System.out.println("+-----------------------------------+");
-											System.out.println("|        UNITY FINANCIAL BANK       |");
-											System.out.println("|-----------------------------------|");
-											System.out.println("|\tSELECT AN OPERATION BELOW   |");
-											System.out.println("|-----------------------------------|");
-											System.out.println("|\t1 <---- login               |");
-											System.out.println("|\t2 <---- Open account        |");
-											System.out.println("+-----------------------------------+");
-											iOperation = input.nextInt();
+										case 5:
+											System.out.println("Logged out successfully\n");
+											System.out.println("Thank you..Byeee..!");
 										break;
 
-                                        default:
-                                            System.out.println("Invalid option");
-											System.out.println("Please try again");
-											iOperation5 = input.nextInt();
+										case 6:
+										  System.out.println("Do you really want to close your account?");
+										  System.out.println("Enter <YES> to confirm");
+										  System.out.println("Enter <NO> to return to Account Management");
+										  char cAnswer5 = Character.toUpperCase(input.next().charAt(0));
+										  
+											if ( cAnswer5 == 'Y' )
+												
+											{
+												System.out.println("Your account has been closed successfully");
+												sFirstName5 = " ";
+												sLastName5 = " ";
+												rBalance5 = 0;
+												rWithdrawAmount5 = 0;
+												rDeposit5 = 0;
+												sIDnumber5 = " ";
+												iClientNumberFill5 --;
+												sPhoneNumber5 = " ";
+												sPINregistered5 = " ";
+												iNumDeposit5 = 0;
+												iNumWithdraw5 = 0;
+												keepLogIn = false;
+											}
 											
-                                    }
+											else
+											{
+												break;
+											}
 
-                                    // Exit the loop if the user chooses to log out
-                                    if (iOperation5 == 4) 
-									{
-                                        break;
-                                    }
-                                }
-                                break; // Exit login loop after the session ends
-                            } else 
-							{
-                                System.out.println("|--------------------------------------------|");
-                                System.out.println("|\tINVALID LOGIN                        |");
-                                System.out.println("|--------------------------------------------|");
-                                System.out.println("|  Enter your client number(between 1 to 5): |");
-                                System.out.println("+--------------------------------------------+");
-                                iClientNumber = input.nextInt();
-                            }
-                        }
-                    } // End-operations for client 5
+										default:
+											System.out.println("Invalid option");
+											System.out.println("Please try again");
+											break;
+									}
+
+									// Exit the loop if the user chooses to log out
+									if (iOperation5 == 5) {
+										break;
+									}
+								}
+								break; // Exit login loop after the session ends
+							} else {
+								System.out.println("|--------------------------------------------|");
+								System.out.println("|\tINVALID LOGIN                        |");
+								System.out.println("|--------------------------------------------|");
+								ClientFiveLogin = false;
+								break;
+							}
+						}
+					} // End-operations for client 5
 					
                     break; // Breaking switch 1 ( log in )
 					
@@ -882,7 +951,7 @@ public class BankingSystemTesting
 						}
 
 						System.out.println("Client registration successful");
-						System.out.println("Please log in on client number 1");
+						System.out.println("Please log in on client number 2");
 						sPINcreate = "";
 						iClientNumberFill2++;
 					 }
@@ -938,7 +1007,7 @@ public class BankingSystemTesting
 						}
 
 						System.out.println("Client registration successful");
-						System.out.println("Please log in on client number 1");
+						System.out.println("Please log in on client number 3");
 						sPINcreate = "";
 						iClientNumberFill3++;
 					 }
@@ -1026,7 +1095,8 @@ public class BankingSystemTesting
 						System.out.println("Enter your ID number: ");
 						sIDnumber5 = input.nextLine();
 
-						while (sIDnumber5.length() != 13) {
+						while (sIDnumber5.length() != 13) 
+						{
 							System.out.println("ID number must be 13 digits");
 							System.out.println("Please re-enter your ID number");
 							sIDnumber5 = input.nextLine();
