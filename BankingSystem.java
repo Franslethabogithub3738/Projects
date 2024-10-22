@@ -1,7 +1,7 @@
 import java.util.Scanner; // Scanner class is imported from java.util package
 import java.text.DecimalFormat; // DecimalFormat class is imported from java.text package
 
-public class BankingSystemTesting 
+public class BankingSystem
 {
     public static void main(String[] args) 
 	{
@@ -359,11 +359,12 @@ public class BankingSystemTesting
 										default:
 											System.out.println("Invalid option");
 											System.out.println("Please try again");
-											break;
+										break;
 									}
 
 									// Exit the loop if the user chooses to log out
-									if (iOperation2 == 5) {
+									if (iOperation2 == 5) 
+									{
 										break;
 									}
 								}
@@ -872,7 +873,8 @@ public class BankingSystemTesting
 						System.out.println("Enter your ID number: ");
 						sIDnumber1 = input.nextLine();
 
-						while (sIDnumber1.length() != 13) {
+						while (sIDnumber1.length() != 13) 
+						{
 							System.out.println("ID number must be 13 digits");
 							System.out.println("Please re-enter your ID number");
 							sIDnumber1 = input.nextLine();
@@ -894,7 +896,7 @@ public class BankingSystemTesting
 						}
 
 						System.out.println("Client registration successful");
-						System.out.println("Please log in on client number 1");
+						System.out.println("Please log in on your client number");
 						sPINcreate = "";
 						iClientNumberFill1++;
 						
@@ -951,7 +953,7 @@ public class BankingSystemTesting
 						}
 
 						System.out.println("Client registration successful");
-						System.out.println("Please log in on client number 2");
+						System.out.println("Please log in on your client number");
 						sPINcreate = "";
 						iClientNumberFill2++;
 					 }
@@ -1062,7 +1064,7 @@ public class BankingSystemTesting
 						}
 
 						System.out.println("Client registration successful");
-						System.out.println("Please log in on client number 1");
+						System.out.println("Please log in oo your client number");
 						sPINcreate = "";
 						iClientNumberFill4++;
 					 }
@@ -1118,7 +1120,7 @@ public class BankingSystemTesting
 						}
 
 						System.out.println("Client registration successful");
-						System.out.println("Please log in on client number 1");
+						System.out.println("Please log in on your client number");
 						sPINcreate = "";
 						iClientNumberFill5++;
 					 }
