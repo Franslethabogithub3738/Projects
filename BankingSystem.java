@@ -1,6 +1,8 @@
 import java.util.Scanner; // Scanner class is imported from java.util package
 import java.text.DecimalFormat; // DecimalFormat class is imported from java.text package
 
+//@Author Lethabo Matsi
+
 public class BankingSystem
 {
     public static void main(String[] args) 
