@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <main>
+        <h1>Lethabo Matsi Website</h1>
+        <p>Your one and only website to learn HTML</p>
+        </main>
+        <h1>Let us give you a good HTML Content</h1>
+        <h2>Our contact details</h2>
+        <!-- TODO: Add link to Cat Photos-->
+        <p>E-mail: Franslethabo66@gmail.com</p>
+        <p>Phone numbers: 0827244400</p>
+        <img> <!-- Instert your image here -->
+    </body>
+</html>
