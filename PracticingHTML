@@ -1,8 +1,8 @@
 <html>
     <body>
         <main>
-        <h1>Lethabo Matsi Website</h1>
-        <p>Your one and only website to learn HTML</p>
+            <h1>Lethabo Matsi Website</h1>
+            <p>Your one and only website to learn HTML</p>
         </main>
         <h1>Let us give you a good HTML Content</h1>
         <h2>Our contact details</h2>
@@ -10,5 +10,14 @@
         <p>E-mail: Franslethabo66@gmail.com</p>
         <p>Phone numbers: 0827244400</p>
         <img> <!-- Instert your image here -->
+        <h3>Please seach anything related to to html and content shall appear</h3>
     </body>
 </html>
+
+<button>Search content</button>
+<input type="text">
+<style>
+    button{
+        background-color: rgb(41, 139, 163);
+    }
+</style>
