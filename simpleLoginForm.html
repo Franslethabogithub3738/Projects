@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login form</title>
+    </head>
+    <body>
+        <form action="/submit" method="post">
+            <label for="username">username: </label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="password">Password: </label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <input type="submit" value="Login">
+            <input type="reset" value="Reset">
+        </form>
+        <hr>
+        <form action="/submit-contact" method="post">
+            <label for="name">Name: </label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <label for="email">Email: </label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <label for="message">Message:</label>
+            <textarea type="text" id="message" name="email" required></textarea>
+            <br>
+            <button type="submit">Send</button>
+        </form>
+        <br>
+        <form action="/submit-bmi" method="post">
+            <label for="wight">Weight(kg):</label>
+            <input type="number" id="Weight" name="Weight" required>
+            <br>
+            <label for="height">Height(cm): </label>
+            <input type="number" id="height" name="height" required>
+            <br>
+            <button type="submit">Calculate BMI</button>
+        </form>
+        <hr>
+    </body>
+</html>
